@@ -4,11 +4,11 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      text_input: ''
+  export default {
+    data() {
+      return {
+        text_input: ''
+      }
     }
   }
-}
 </script>

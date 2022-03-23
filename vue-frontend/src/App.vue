@@ -1,33 +1,33 @@
 <template>
-  <div class = "container">
-    <hdr_bar title = "myTitle" />
-    <hdr_bar title = "test" />
-    <text_entry></text_entry>
-
-  </div>
+  <nav>
+    | <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link> |
+    <router-link to="/musicinput">Upload music</router-link> | 
+    <router-link to="/statsPage">Statistics</router-link> |
+  </nav>
+  <router-view/>
 </template>
-
-<script>
-import hdr_bar from './components/hdr_bar.vue'
-import text_entry from './components/text_entry.vue'
-
-
-export default{
-  name:'App',
-  components: {
-    hdr_bar,
-    text_entry,
-}
-}
-</script>
 
 <style>
 #app {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Lato, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: left;
+  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
