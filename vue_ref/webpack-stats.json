@@ -1,0 +1,45 @@
+{
+  "status": "done",
+  "assets": {
+    "css/vue_app_01.css": {
+      "name": "css/vue_app_01.css",
+      "path": "/Users/18chanp1/Library/CloudStorage/OneDrive-UBC/Active Use/UBC/20 Year 2/16 CPEN 291/04 Projects/P2_A_G20/django_vue_mpa/static/vue/css/vue_app_01.css"
+    },
+    "js/vue_app_01.js": {
+      "name": "js/vue_app_01.js",
+      "path": "/Users/18chanp1/Library/CloudStorage/OneDrive-UBC/Active Use/UBC/20 Year 2/16 CPEN 291/04 Projects/P2_A_G20/django_vue_mpa/static/vue/js/vue_app_01.js"
+    },
+    "css/vue_app_02.css": {
+      "name": "css/vue_app_02.css",
+      "path": "/Users/18chanp1/Library/CloudStorage/OneDrive-UBC/Active Use/UBC/20 Year 2/16 CPEN 291/04 Projects/P2_A_G20/django_vue_mpa/static/vue/css/vue_app_02.css"
+    },
+    "js/vue_app_02.js": {
+      "name": "js/vue_app_02.js",
+      "path": "/Users/18chanp1/Library/CloudStorage/OneDrive-UBC/Active Use/UBC/20 Year 2/16 CPEN 291/04 Projects/P2_A_G20/django_vue_mpa/static/vue/js/vue_app_02.js"
+    },
+    "js/chunk-vendors.js": {
+      "name": "js/chunk-vendors.js",
+      "path": "/Users/18chanp1/Library/CloudStorage/OneDrive-UBC/Active Use/UBC/20 Year 2/16 CPEN 291/04 Projects/P2_A_G20/django_vue_mpa/static/vue/js/chunk-vendors.js"
+    },
+    "favicon.ico": {
+      "name": "favicon.ico",
+      "path": "/Users/18chanp1/Library/CloudStorage/OneDrive-UBC/Active Use/UBC/20 Year 2/16 CPEN 291/04 Projects/P2_A_G20/django_vue_mpa/static/vue/favicon.ico"
+    },
+    "index.html": {
+      "name": "index.html",
+      "path": "/Users/18chanp1/Library/CloudStorage/OneDrive-UBC/Active Use/UBC/20 Year 2/16 CPEN 291/04 Projects/P2_A_G20/django_vue_mpa/static/vue/index.html"
+    }
+  },
+  "chunks": {
+    "vue_app_01": [
+      "js/chunk-vendors.js",
+      "css/vue_app_01.css",
+      "js/vue_app_01.js"
+    ],
+    "vue_app_02": [
+      "js/chunk-vendors.js",
+      "css/vue_app_02.css",
+      "js/vue_app_02.js"
+    ]
+  }
+}
