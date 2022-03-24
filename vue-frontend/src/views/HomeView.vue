@@ -49,7 +49,7 @@
 
   .main {
     display: flex ;
-    background-color: #9ADCFF;
+    /* background-color: #9ADCFF; */
     border-radius: 10px;
     margin:10px;
     padding: 30px;
@@ -57,11 +57,11 @@
   }
 
   .main > div {
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   margin: 20px;
   padding: 20px;
   font-size: 20px;
-  text-align: center;
+  text-align: left;
   border-radius: 10px;
   }
 
