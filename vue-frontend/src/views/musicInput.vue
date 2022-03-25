@@ -25,12 +25,14 @@
     B for 2 RU, you would input the following:
   </p>
 
-  <text_entry></text_entry> &nbsp; &nbsp;
-  <std_but text = "Submit" />
-
   <p>
     c1b2 
   </p>
+
+  <text_entry class="entryBox"></text_entry> &nbsp; &nbsp;
+  <std_but text = "Submit" class="flexbut" id="nSize" />
+
+  
   <h2>Option 2: Button Input</h2>
   
   <p>
@@ -136,7 +138,7 @@ import text_entry from "/src/components/text_entry.vue"
 
   .noteInput{
     display: flex ;
-    background-color: #9ADCFF;
+    background-color: #ffffff;
     border-radius: 10px;
     margin:10px;
     padding: 30px;
@@ -154,18 +156,35 @@ import text_entry from "/src/components/text_entry.vue"
   } */
 
   .flexbut{
-    background-color: #f1f1f1;
+    background-color: #26374a;
+    color:white;
     margin: 3px;
     padding: 20px;
     font-size: 20px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 4px;
     flex-grow: 1;
+    border: none;
   }
 
-  .inputdisp{
-    min-height: 30px;
+.flexbut:hover {
+  background-color: #1c578a;
+  outline:none;
   }
+
+.button:active {
+  background-color: #16446c;
+  outline:none;
+}
+
+.inputdisp{
+  min-height: 30px;
+}
+
+.entryBox {
+  width: 205px; height: 39px
+}
+
 
   
 
