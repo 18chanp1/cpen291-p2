@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4^dd-a%vh921a@2bl&@=h1qt!(zmem_y)@6@5wxn@n$7#klkf4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["cpen291-20.ece.ubc.ca", "127.0.0.1"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'music_control_webapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME':str( BASE_DIR / 'db.sqlite3'),
     }
 }
 
