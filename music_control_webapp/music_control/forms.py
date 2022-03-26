@@ -1,4 +1,6 @@
-from django import forms
+from django.forms import ModelForm
+from music_control.models import MusicNotes
 
-class StringInputForm(forms.Form):
-    input = forms.CharField(label = "input", max_length=1000, initial="John")
+class MusicNotesForm(ModelForm):
+    model = MusicNotes
+    fields = ['notes']
