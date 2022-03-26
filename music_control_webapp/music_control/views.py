@@ -5,7 +5,7 @@ from .models import MusicNotes
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    return render(request, template_name='index.html')
 
 def arduino_button(request):
     if request.method == 'POST':

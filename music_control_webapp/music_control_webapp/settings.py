@@ -14,8 +14,12 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRONTEND_DIR = os.path.join(BASE_DIR, 'vue-frontend')
 
+STATICFILES_DIRS = [
+    os.path.join(FRONTEND_DIR, 'dist/static'),
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -27,7 +31,7 @@ SECRET_KEY = 'django-insecure-4^dd-a%vh921a@2bl&@=h1qt!(zmem_y)@6@5wxn@n$7#klkf4
 DEBUG = True
 
 ALLOWED_HOSTS = ["cpen291-20.ece.ubc.ca", "127.0.0.1"]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Application definition
 
@@ -56,7 +60,9 @@ ROOT_URLCONF = 'music_control_webapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(FRONTEND_DIR, 'dist'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,7 +84,7 @@ WSGI_APPLICATION = 'music_control_webapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':str( BASE_DIR / 'db.sqlite3'),
+        'NAME':str( BASE_DIR + '/' 'db.sqlite3'),
     }
 }
 

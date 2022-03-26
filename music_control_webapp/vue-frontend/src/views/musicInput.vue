@@ -29,9 +29,11 @@
     c1b2 
   </p>
 
-  <text_entry class="entryBox"></text_entry> &nbsp; &nbsp;
-  <std_but text = "Submit" class="flexbut" id="nSize" />
+  <form @submit.prevent="submitForm">
+    <textarea cols = '65' rows = '3' v-model = "typedscript">Input your music here.</textarea>
+    <input type="submit" value="Submit" class = "flexbut">
 
+  </form>   
   
   <h2>Option 2: Button Input</h2>
   
@@ -70,9 +72,9 @@
 </template>
 
 <script>
-
 import std_but from "/src/components/std_but.vue"
-import text_entry from "/src/components/text_entry.vue"
+import axios from 'axios'
+
   export default{
     
     name: 'musicInput',
@@ -84,7 +86,6 @@ import text_entry from "/src/components/text_entry.vue"
     },
     components:{
       std_but,
-      text_entry
     },
     methods:{
         clicked(nextchar){
@@ -93,6 +94,21 @@ import text_entry from "/src/components/text_entry.vue"
         },
         reset(){
           this.script=''
+        },
+        async submitForm(){
+          console.log('submitted')
+          const request = {
+            type: 'MusicInTyped',
+            arguments: this.typedscript,
+          }
+          
+          await axios 
+            .post('/api/typedrequest/', request)
+            .then(response =>{
+              console.log(response)
+            }).catch(error => {
+              console.log(error)
+            })
         }
     }
        
