@@ -42,32 +42,31 @@
     defaults to 1 RU.
   </p>
 
-  <div class="noteInput">
-    <std_but @pressed-button = "clicked($event)" class="flexbut" text = "C"/>
-    <std_but @pressed-button = "clicked($event)" class="flexbut" text = "D"/>
-    <std_but @pressed-button = "clicked($event)" class="flexbut" text = "E"/>
-    <std_but @pressed-button = "clicked($event)" class="flexbut" text = "F"/>
-    <std_but @pressed-button = "clicked($event)" class="flexbut" text = "G"/>
-    <std_but @pressed-button = "clicked($event)" class="flexbut" text = "A"/>
-    <std_but @pressed-button = "clicked($event)" class="flexbut" text = "B"/>
-    <std_but @pressed-button = "clicked($event)" class="flexbut" text = "C"/>
-  </div>
+  <form @submit.prevent = "submitBut">
+    <div class="noteInput">
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "C"/>
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "D"/>
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "E"/>
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "F"/>
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "G"/>
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "A"/>
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "B"/>
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "C"/>
+    </div>
 
-  <p>
-    Your Input: 
-  </p>
+    <p>
+      Your Input: 
+    </p>
 
-  <p class="inputdisp">{{this.script}} </p>
+    <p class="inputdisp">{{this.script}} </p>
 
-  
-
-  <div class="noteInput">
-    <std_but @pressed-button = "reset()" text = "Reset" class = "flexbut"/>
+    <div class="noteInput">
+    <std_but type = "button" @pressed-button = "reset()" text = "Reset" class = "flexbut"/>
     <std_but @pressed-button = "submit()" text = "Submit" class = "flexbut"/>
-  </div>
+    </div>
+    
+  </form>
 
-
- 
 </div>
 </template>
 
@@ -81,7 +80,8 @@ import axios from 'axios'
     data(){
         return{
             count:0,
-            script: ''
+            script: '',
+            typedscript:'',
         }
     },
     components:{
@@ -96,10 +96,24 @@ import axios from 'axios'
           this.script=''
         },
         async submitForm(){
-          console.log('submitted')
+          console.log('submitted, typed')
           const request = {
             type: 'MusicInTyped',
             arguments: this.typedscript,
+          }
+          
+          await axios 
+            .post('/api/typedrequest/', request)
+            .then(response =>{
+              console.log(response)
+            }).catch(error => {
+              console.log(error)
+            })
+        },async submitBut(){
+          console.log('submitted, button')
+          const request = {
+            type: 'MusicInButtoned',
+            arguments: this.script,
           }
           
           await axios 
