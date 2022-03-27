@@ -14,9 +14,7 @@
   </ol>
 
   <p>
-    Insert information on units here
-
-    Type in chronological order, the pitch of each note, followed by the length 
+    Type in chronological order, the pitch of each note, followed by the relative length 
     of each note. Do not include spaces. 
   </p>
 
@@ -31,8 +29,7 @@
 
   <form @submit.prevent="submitForm">
     <textarea cols = '65' rows = '3' v-model = "typedscript">Input your music here.</textarea>
-    <input type="submit" value="Submit" class = "flexbut">
-
+    <input type="submit" value="Submit" class = "flexbut" id = "ButtonForSubmit">
   </form>   
   
   <h2>Option 2: Button Input</h2>
@@ -64,6 +61,9 @@
     <std_but type = "button" @pressed-button = "reset()" text = "Reset" class = "flexbut"/>
     <std_but @pressed-button = "submit()" text = "Submit" class = "flexbut"/>
     </div>
+
+    <div id="snackbar">{{error}}</div>
+    <div id="snackbarG">{{error}}</div>
     
   </form>
 
@@ -82,6 +82,7 @@ import axios from 'axios'
             count:0,
             script: '',
             typedscript:'',
+            error: '',
         }
     },
     components:{
@@ -96,19 +97,28 @@ import axios from 'axios'
           this.script=''
         },
         async submitForm(){
-          console.log('submitted, typed')
-          const request = {
-            type: 'MusicInTyped',
-            arguments: this.typedscript,
+          var pattern = /^(([a-g][1-9]+)*)$/
+          console.log(pattern.test(this.typedscript))
+          if(pattern.test(this.typedscript)){
+            console.log('submitted, typed')
+            const request = {
+              type: 'MusicInTyped',
+              arguments: this.typedscript,
+            }
+            
+            await axios 
+              .post('/api/typedrequest/', request)
+              .then(response =>{
+                console.log(response)
+                this.showBar("Submission accepted", 'G')
+              }).catch(error => {
+                console.log(error)
+                this.showBar("Server error. Please try again later.",'')
+              })
+          } else {
+            console.log('inputerr')
+            this.showBar('Input error. Please study the input format in detail.', '')
           }
-          
-          await axios 
-            .post('/api/typedrequest/', request)
-            .then(response =>{
-              console.log(response)
-            }).catch(error => {
-              console.log(error)
-            })
         },async submitBut(){
           console.log('submitted, button')
           const request = {
@@ -120,10 +130,18 @@ import axios from 'axios'
             .post('/api/typedrequest/', request)
             .then(response =>{
               console.log(response)
+              this.showBar("Submission accepted", 'G')
             }).catch(error => {
               console.log(error)
+              this.showBar("Server error. Please try again later.",'')
             })
-        }
+          },
+          showBar(input, color) {
+            this.error = input
+            var x = document.getElementById("snackbar" + color);
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+          },
     }
        
     }
@@ -134,7 +152,7 @@ import axios from 'axios'
 <style>
   h1{
     font-family: Lato;
-    font: 38px;
+    font-size: 38px;
     font-weight: bold;
     text-align: left;
     margin-bottom: 3px;
@@ -147,14 +165,22 @@ import axios from 'axios'
 
   h2{
     font-family: Lato;
-    font: 36px;
+    font-size: 36px;
     font-weight: bold;
     text-align: left;
   }
 
   p {
     font-family: Noto Sans;
-    font: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    max-width: 65ch;
+  }
+
+  ol {
+    font-family: Noto Sans;
+    font-size: 20px;
     font-weight: 500;
     text-align: left;
     max-width: 65ch;
@@ -186,6 +212,7 @@ import axios from 'axios'
   } */
 
   .flexbut{
+    font-family: Noto Sans;
     background-color: #26374a;
     color:white;
     margin: 3px;
@@ -208,13 +235,85 @@ import axios from 'axios'
 }
 
 .inputdisp{
-  min-height: 30px;
+  min-height: 40px;
+  border-style: solid;
+  padding: 10px;
 }
 
 .entryBox {
   width: 205px; height: 39px
 }
 
+#ButtonForSubmit {
+  margin-top: 1em;
+}
+
+/* Snackbar */
+#snackbar {
+  border-radius: 4px;
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #BB6464;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 20px;
+}
+
+#snackbarG{
+  border-radius: 4px;
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #88FF88;
+  color: #000000;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 20px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbarG.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
 
   
 
