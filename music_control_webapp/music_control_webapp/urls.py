@@ -20,5 +20,6 @@ from music_control.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('music_control/', include('music_control.urls')),
-    path('', index, name='index'),
+    path("", index, name='index'),
+    path("musicinput", index, name='index'),
 ]
