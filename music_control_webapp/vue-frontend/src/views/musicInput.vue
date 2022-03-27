@@ -28,7 +28,8 @@
   </p>
 
   <form @submit.prevent="submitForm">
-    <textarea cols = '65' rows = '3' v-model = "typedscript">Input your music here.</textarea>
+    <textarea v-model = "typedscript">Input your music here.</textarea>
+    <br/>
     <input type="submit" value="Submit" class = "flexbut" id = "ButtonForSubmit">
   </form>   
   
@@ -313,6 +314,12 @@ import axios from 'axios'
 @keyframes fadeout {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
+}
+
+
+textarea{
+  height : 15em;
+  width : 75ch;
 }
 
   
