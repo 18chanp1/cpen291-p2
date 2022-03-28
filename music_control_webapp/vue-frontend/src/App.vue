@@ -9,6 +9,17 @@
 </template>
 
 <style>
+
+@font-face{
+  font-family: "Noto Sans";
+  src: local("Noto Sans"), url(./fonts/Noto_Sans/NotoSans-Regular.ttf) format("truetype");
+}
+
+@font-face{
+  font-family: "Lato";
+  src: local("Lato"), url(./fonts/Lato2OFL/Lato-Bold.ttf) format("truetype");
+}
+
 #app {
   font-family: Lato, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
