@@ -24,7 +24,7 @@
   </p>
 
   <p>
-    c1b2 
+    C1B2 
   </p>
 
   <form @submit.prevent="submitForm">
@@ -49,7 +49,7 @@
       <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "G"/>
       <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "A"/>
       <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "B"/>
-      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "C"/>
+      <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "R"/>
     </div>
 
     <p>
@@ -98,7 +98,7 @@ import axios from 'axios'
           this.script=''
         },
         async submitForm(){
-          var pattern = /^(([a-g][1-9]+)*)$/
+          var pattern = /^(([A-GR][1-9]+)*)$/
           console.log(pattern.test(this.typedscript))
           if(pattern.test(this.typedscript)){
             console.log('submitted, typed')
@@ -108,7 +108,7 @@ import axios from 'axios'
             }
             
             await axios 
-              .post('/api/typedrequest/', request)
+              .post('/api/musicinput/', request)
               .then(response =>{
                 console.log(response)
                 this.showBar("Submission accepted", 'G')
@@ -128,7 +128,7 @@ import axios from 'axios'
           }
           
           await axios 
-            .post('/api/typedrequest/', request)
+            .post('/api/musicinput/', request)
             .then(response =>{
               console.log(response)
               this.showBar("Submission accepted", 'G')
