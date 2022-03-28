@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from music_control.models import MusicNotes
+from .models import MusicNotes
 
 class MusicNotesForm(ModelForm):
     model = MusicNotes
