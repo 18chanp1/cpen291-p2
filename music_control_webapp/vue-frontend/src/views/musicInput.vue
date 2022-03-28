@@ -1,6 +1,6 @@
 <template>
 <div class = "General">
-  <h1>Upload Music</h1>
+  <h1>Typography Music</h1>
   <hr>
 
   <h2>Option 1: Text Input</h2>
@@ -108,7 +108,7 @@ import axios from 'axios'
             }
             
             await axios 
-              .post('/api/musicinput/', request)
+              .post('/music_control/input/', request)
               .then(response =>{
                 console.log(response)
                 this.showBar("Submission accepted", 'G')
@@ -128,7 +128,7 @@ import axios from 'axios'
           }
           
           await axios 
-            .post('/api/musicinput/', request)
+            .post('/music_control/input/', request)
             .then(response =>{
               console.log(response)
               this.showBar("Submission accepted", 'G')
@@ -152,9 +152,8 @@ import axios from 'axios'
 
 <style>
   h1{
-    font-family: Lato;
+    font-family: Lato-Bold;
     font-size: 38px;
-    font-weight: bold;
     text-align: left;
     margin-bottom: 3px;
   }
@@ -165,7 +164,7 @@ import axios from 'axios'
   }
 
   h2{
-    font-family: Lato;
+    font-family: Lato-Bold;
     font-size: 36px;
     font-weight: bold;
     text-align: left;

@@ -60,7 +60,7 @@
 
 <style>
  h1{
-    font-family: Lato;
+    font-family: Lato-Bold;
     font-size: 38px;
     font-weight: bold;
     text-align: left;
@@ -73,7 +73,7 @@
   }
 
   h2{
-    font-family: Lato;
+    font-family: Lato-Bold;
     font-size: 36px;
     font-weight: bold;
     text-align: left;
