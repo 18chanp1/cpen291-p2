@@ -16,8 +16,8 @@
 }
 
 @font-face{
-  font-family: "Lato-Bold";
-  src: local("Lato-Bold"), url(./fonts/Lato2OFL/Lato-Bold.ttf) format("truetype");
+  font-family: "Lato-Semibold";
+  src: local("Lato-Semibold"), url(./fonts/Lato2OFL/Lato-Semibold.ttf) format("truetype");
 }
 
 #app {

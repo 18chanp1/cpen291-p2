@@ -1,7 +1,7 @@
 <template>
 <div class = "General">
-  <h1>Typography Music</h1>
-  <hr>
+  <h1>Music Input</h1>
+  <!-- <hr> -->
 
   <h2>Option 1: Text Input</h2>
   <p>
@@ -152,22 +152,26 @@ import axios from 'axios'
 
 <style>
   h1{
-    font-family: Lato-Bold;
+    font-family: Lato-Semibold;
     font-size: 38px;
     text-align: left;
-    margin-bottom: 3px;
-  }
 
-  hr {
-    border-top: 0.2px solid red;
 
+    border-bottom: 1px solid #af3c43;
+    border-bottom-color: rgb(175, 60, 67);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom: .2em;
+    margin-top: 1em;
+    padding-bottom: .2em;
   }
 
   h2{
-    font-family: Lato-Bold;
-    font-size: 36px;
-    font-weight: bold;
+    font-family: Lato-SemiBold;
+    font-size: 34px;
     text-align: left;
+    margin-bottom: 11.5px;
+    margin-top: 38px;
   }
 
   p {
