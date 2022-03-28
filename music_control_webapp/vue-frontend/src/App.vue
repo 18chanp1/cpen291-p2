@@ -17,7 +17,7 @@
 
 @font-face{
   font-family: "Lato";
-  src: local("Lato"), url(./fonts/Lato2OFL/Lato-Bold.ttf) format("truetype");
+  src: local("Lato"), url(./fonts/Lato2OFL/Lato-Regular.ttf) format("truetype");
 }
 
 #app {
