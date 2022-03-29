@@ -98,7 +98,17 @@
     font-weight: 500;
     text-align: left;
   }
+  
   th {
+    min-width: 65vw;
+    }
+  
+  @media only screen and (min-width: 768px) {
+    th {
     min-width: 20em;
+    }
   }
+  
+
+
 </style>

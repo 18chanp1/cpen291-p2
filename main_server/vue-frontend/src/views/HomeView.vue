@@ -1,73 +1,111 @@
 <template>
-  <h1>Welcome to the Music Educational Device</h1>
+  <div class="General">
+    <h1>The Music Player</h1>
 
-  <div class = "main">
-    <div>
-      <h2>Current Operating Mode</h2>
-      PLACEHOLDER:
+    <p> Welcome to our music player. We have poured in
+      our hearts and our souls into this music player, 
+      we hope you will enjoy the wonderful tunes and 
+      the educational musical experiences this robot.
+    </p>
 
-    </div>
-    <div>
-      <h2>Select your music choice here</h2>
-      <drop_down></drop_down>
-    </div>
-    <div>Testificate</div>
-  </div>
+    <h2>Robot status</h2>
+    asdf
+    <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "cunt"/>
 
-  <div class = "container">
-    <hdr_bar title = "myTitle" />
-    <hdr_bar title = "test" />
-    <text_entry></text_entry>
-    <drop_down></drop_down>
+
   </div>
 </template>
 
 <script>
-  import drop_down from '/src/components/drop_down.vue'
-  import hdr_bar from '/src/components/hdr_bar.vue'
-  import text_entry from '/src/components/text_entry.vue'
-
+  //import axios from 'axios'
+  import std_but from '/src/components/std_but.vue'
   export default {
-    name:'App',
-    components: {
-      hdr_bar,
-      text_entry,
-      drop_down
+    name: 'homePage',
+    data() { 
+      return{
+
+      }
+    },
+    methods: {
+      clicked (){
+        console.log('oi')
+        this.$router.push('/about');
+      },
+      
+    },
+    components:{
+      std_but,
     }
   }
 </script>
 
+
 <style>
-  h2 {
-    font-family: Lato, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+ h1{
+    font-family: Lato-Semibold;
+    font-size: 38px;
     text-align: left;
-    color: #2c3e50;
-    /* margin-top: 60px; */
+    border-bottom: 1px solid #af3c43;
+    border-bottom-color: rgb(175, 60, 67);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom: .2em;
+    margin-top: 1em;
+    padding-bottom: .2em;
   }
-
-  .main {
-    display: flex ;
-    /* background-color: #9ADCFF; */
-    border-radius: 10px;
-    margin:10px;
-    padding: 30px;
-    justify-content: center;
+   h2{
+    font-family: Lato-SemiBold;
+    font-size: 34px;
+    text-align: left;
+    margin-bottom: 11.5px;
+    margin-top: 38px;
   }
-
-  .main > div {
-  /* background-color: #f1f1f1; */
-  margin: 20px;
-  padding: 20px;
-  font-size: 20px;
-  text-align: left;
-  border-radius: 10px;
-  }
-
-  .body {
+  p {
     font-family: Noto Sans;
-    font-size: 20px
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    max-width: 65ch;
   }
+  ol {
+    font-family: Noto Sans;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    max-width: 65ch;
+  }
+  .General{
+    margin: auto;
+    max-width: 55ch;
+    text-align: left;
+    justify-content: left;
+    font-family: Noto Sans;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+  }
+  
+  th {
+    min-width: 65vw;
+    }
+  
+  @media only screen and (min-width: 768px) {
+    th {
+    min-width: 20em;
+    }
+  }
+  
+  .flexbut{
+    font-family: Noto Sans;
+    background-color: #26374a;
+    color:white;
+    margin: 3px;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 4px;
+    border: none;
+  }
+
 
 </style>

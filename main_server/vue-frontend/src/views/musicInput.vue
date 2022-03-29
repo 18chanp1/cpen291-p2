@@ -110,7 +110,9 @@ import axios from 'axios'
               .post('/music_control/input/', request)
               .then(response =>{
                 console.log(response)
-                this.showBar("Submission accepted", 'G')
+                this.showBar("Submission accepted. You will now be redirected home", 'G')
+                setTimeout(this.redirectHome, 2500)
+                
               }).catch(error => {
                 console.log(error)
                 this.showBar("Server error. Please try again later.",'')
@@ -141,6 +143,9 @@ import axios from 'axios'
             var x = document.getElementById("snackbar" + color);
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+          },
+          redirectHome(){
+            this.$router.push('/')
           },
     }
        
