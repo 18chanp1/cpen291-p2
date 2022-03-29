@@ -108,7 +108,7 @@ import axios from 'axios'
             }
             
             await axios 
-              .post('/api/musicinput/', request)
+              .post('/api/input/', request)
               .then(response =>{
                 console.log(response)
                 this.showBar("Submission accepted", 'G')
@@ -128,7 +128,7 @@ import axios from 'axios'
           }
           
           await axios 
-            .post('/api/musicinput/', request)
+            .post('/api/input/', request)
             .then(response =>{
               console.log(response)
               this.showBar("Submission accepted", 'G')

@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.test, name = 'test'),
     path('', views.index, name = 'index'),
-    path('api/musicinput/', views.input, name='input')
+    path('api/input/', views.input, name='input')
 ]
