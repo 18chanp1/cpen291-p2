@@ -100,7 +100,7 @@ import axios from 'axios'
           var pattern = /^(([A-GR][1-9]+)*)$/
           console.log(pattern.test(this.typedscript))
          
-	  if(pattern.test(this.typedscript)){
+         if(pattern.test(this.typedscript)){
             console.log('submitted, typed')
             const request = {
               type: 'MusicInTyped',
