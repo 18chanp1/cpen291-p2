@@ -99,7 +99,8 @@ import axios from 'axios'
         async submitForm(){
           var pattern = /^(([A-GR][1-9]+)*)$/
           console.log(pattern.test(this.typedscript))
-          if(pattern.test(this.typedscript)){
+         
+	  if(pattern.test(this.typedscript)){
             console.log('submitted, typed')
             const request = {
               type: 'MusicInTyped',
@@ -107,7 +108,7 @@ import axios from 'axios'
             }
             
             await axios 
-              .post('/music_control/input/', request)
+              .post('/api/input/', request)
               .then(response =>{
                 console.log(response)
                 this.showBar("Submission accepted. You will now be redirected home", 'G')
@@ -129,7 +130,7 @@ import axios from 'axios'
           }
           
           await axios 
-            .post('/music_control/input/', request)
+            .post('/api/input/', request)
             .then(response =>{
               console.log(response)
               this.showBar("Submission accepted", 'G')
