@@ -1,7 +1,7 @@
 <template>
 <div class = "General">
-  <h1>Upload Music</h1>
-  <hr>
+  <h1>Music Input</h1>
+  <!-- <hr> -->
 
   <h2>Option 1: Text Input</h2>
   <p>
@@ -58,9 +58,9 @@
 
     <p class="inputdisp">{{this.script}} </p>
 
-    <div class="noteInput">
-    <std_but type = "button" @pressed-button = "reset()" text = "Reset" class = "flexbut"/>
-    <std_but @pressed-button = "submit()" text = "Submit" class = "flexbut"/>
+    <div class="submitButtons">
+    <std_but type = "button" @pressed-button = "reset()" text = "Reset" class = "flexbut2"/>
+    <std_but @pressed-button = "submit()" text = "Submit" class = "flexbut2"/>
     </div>
 
     <div id="snackbar">{{error}}</div>
@@ -74,7 +74,6 @@
 <script>
 import std_but from "/src/components/std_but.vue"
 import axios from 'axios'
-
   export default{
     
     name: 'musicInput',
@@ -108,7 +107,7 @@ import axios from 'axios'
             }
             
             await axios 
-              .post('/api/musicinput/', request)
+              .post('/music_control/input/', request)
               .then(response =>{
                 console.log(response)
                 this.showBar("Submission accepted", 'G')
@@ -128,7 +127,7 @@ import axios from 'axios'
           }
           
           await axios 
-            .post('/api/musicinput/', request)
+            .post('/music_control/input/', request)
             .then(response =>{
               console.log(response)
               this.showBar("Submission accepted", 'G')
@@ -146,31 +145,29 @@ import axios from 'axios'
     }
        
     }
-
 </script>
 
 
 <style>
   h1{
-    font-family: Lato;
+    font-family: Lato-Semibold;
     font-size: 38px;
-    font-weight: bold;
     text-align: left;
-    margin-bottom: 3px;
+    border-bottom: 1px solid #af3c43;
+    border-bottom-color: rgb(175, 60, 67);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom: .2em;
+    margin-top: 1em;
+    padding-bottom: .2em;
   }
-
-  hr {
-    border-top: 0.2px solid red;
-
-  }
-
   h2{
-    font-family: Lato;
-    font-size: 36px;
-    font-weight: bold;
+    font-family: Lato-SemiBold;
+    font-size: 34px;
     text-align: left;
+    margin-bottom: 11.5px;
+    margin-top: 38px;
   }
-
   p {
     font-family: Noto Sans;
     font-size: 20px;
@@ -178,7 +175,6 @@ import axios from 'axios'
     text-align: left;
     max-width: 65ch;
   }
-
   ol {
     font-family: Noto Sans;
     font-size: 20px;
@@ -186,15 +182,14 @@ import axios from 'axios'
     text-align: left;
     max-width: 65ch;
   }
-
   .General{
     margin: auto;
     max-width: 65ch;
     justify-content: center;
   }
-
   .noteInput{
-    display: flex ;
+    display: grid ;
+    grid-template-columns: repeat(auto-fill,minmax(60px, 1fr));
     background-color: #ffffff;
     border-radius: 10px;
     margin:10px;
@@ -202,15 +197,14 @@ import axios from 'axios'
     justify-content: center;
   }
 
-  /* .noteInput > div {
-    background-color: #f1f1f1;
-    margin: 3px;
-    padding: 20px;
-    font-size: 20px;
-    text-align: center;
+  .submitButtons{
+    display: flex ;
+    background-color: #ffffff;
     border-radius: 10px;
-    flex-grow: 1;
-  } */
+    margin:10px;
+    padding: 30px;
+    justify-content: center;
+  }
 
   .flexbut{
     font-family: Noto Sans;
@@ -221,34 +215,40 @@ import axios from 'axios'
     font-size: 20px;
     text-align: center;
     border-radius: 4px;
-    flex-grow: 1;
     border: none;
   }
+  .flexbut2{
+    font-family: Noto Sans;
+    background-color: #26374a;
+    color:white;
+    margin: 3px;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 4px;
+    border: none;
+  }
+
 
 .flexbut:hover {
   background-color: #1c578a;
   outline:none;
   }
-
 .button:active {
   background-color: #16446c;
   outline:none;
 }
-
 .inputdisp{
   min-height: 40px;
   border-style: solid;
   padding: 10px;
 }
-
 .entryBox {
   width: 205px; height: 39px
 }
-
 #ButtonForSubmit {
   margin-top: 1em;
 }
-
 /* Snackbar */
 #snackbar {
   border-radius: 4px;
@@ -266,7 +266,6 @@ import axios from 'axios'
   bottom: 30px;
   font-size: 20px;
 }
-
 #snackbarG{
   border-radius: 4px;
   visibility: hidden;
@@ -283,47 +282,44 @@ import axios from 'axios'
   bottom: 30px;
   font-size: 20px;
 }
-
 #snackbar.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-
 #snackbarG.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;} 
   to {bottom: 30px; opacity: 1;}
 }
-
 @keyframes fadein {
   from {bottom: 0; opacity: 0;}
   to {bottom: 30px; opacity: 1;}
 }
-
 @-webkit-keyframes fadeout {
   from {bottom: 30px; opacity: 1;} 
   to {bottom: 0; opacity: 0;}
 }
-
 @keyframes fadeout {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
 
-
 textarea{
-  height : 15em;
-  width : 75ch;
+    height : 15em;
+    width : 88vw;
+  }
+
+
+@media only screen and (min-width: 768px){
+  textarea{
+    height : 15em;
+    width : 75ch;
+  }
 }
-
   
-
 </style>
-
-

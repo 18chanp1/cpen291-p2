@@ -16,12 +16,14 @@
 }
 
 @font-face{
-  font-family: "Lato";
-  src: local("Lato"), url(./fonts/Lato2OFL/Lato-Regular.ttf) format("truetype");
+  font-family: "Lato-Semibold";
+  src: local("Lato-Semibold"), url(./fonts/Lato2OFL/Lato-Semibold.ttf) format("truetype");
 }
 
 #app {
   font-family: Lato, Helvetica, Arial, sans-serif;
+  font-variant-ligatures: no-common-ligatures;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: right; */

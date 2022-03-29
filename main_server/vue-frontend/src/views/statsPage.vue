@@ -1,7 +1,6 @@
 <template>
   <div class="General">
     <h1>Statistics</h1>
-    <hr/>
    
     <table class = 'General'>
       <tr>
@@ -22,7 +21,6 @@
 
 <script>
   import axios from 'axios'
-
   export default {
     name: 'statsPage',
     data() { 
@@ -53,32 +51,29 @@
       
     }
   }
-
-
 </script>
 
 
 <style>
  h1{
-    font-family: Lato;
+    font-family: Lato-Semibold;
     font-size: 38px;
-    font-weight: bold;
     text-align: left;
-    margin-bottom: 3px;
+    border-bottom: 1px solid #af3c43;
+    border-bottom-color: rgb(175, 60, 67);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom: .2em;
+    margin-top: 1em;
+    padding-bottom: .2em;
   }
-
-  hr {
-    border-top: 0.2px solid red;
-
-  }
-
-  h2{
-    font-family: Lato;
-    font-size: 36px;
-    font-weight: bold;
+   h2{
+    font-family: Lato-SemiBold;
+    font-size: 34px;
     text-align: left;
+    margin-bottom: 11.5px;
+    margin-top: 38px;
   }
-
   p {
     font-family: Noto Sans;
     font-size: 20px;
@@ -86,7 +81,6 @@
     text-align: left;
     max-width: 65ch;
   }
-
   ol {
     font-family: Noto Sans;
     font-size: 20px;
@@ -94,7 +88,6 @@
     text-align: left;
     max-width: 65ch;
   }
-
   .General{
     margin: auto;
     max-width: 65ch;
@@ -105,10 +98,7 @@
     font-weight: 500;
     text-align: left;
   }
-
   th {
     min-width: 20em;
   }
-
-
 </style>
