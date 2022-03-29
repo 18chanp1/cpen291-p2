@@ -133,7 +133,8 @@ import axios from 'axios'
             .post('/api/input/', request)
             .then(response =>{
               console.log(response)
-              this.showBar("Submission accepted", 'G')
+              this.showBar("Submission accepted. You will now be redirected home", 'G')
+              setTimeout(this.redirectHome, 2500)
             }).catch(error => {
               console.log(error)
               this.showBar("Server error. Please try again later.",'')
@@ -195,7 +196,7 @@ import axios from 'axios'
   }
   .noteInput{
     display: grid ;
-    grid-template-columns: repeat(auto-fill,minmax(60px, 1fr));
+    grid-template-columns: repeat(auto-fill,minmax(80px, 1fr));
     background-color: #ffffff;
     border-radius: 10px;
     margin:10px;

@@ -9,7 +9,7 @@
     </p>
 
     <h2>Robot status</h2>
-    asdf
+    {{this.status}}
     <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "cunt"/>
 
 
@@ -17,21 +17,37 @@
 </template>
 
 <script>
-  //import axios from 'axios'
+  import axios from 'axios'
   import std_but from '/src/components/std_but.vue'
   export default {
     name: 'homePage',
     data() { 
       return{
-
+        status: 'no data'
       }
+    }, mounted (){
+      this.pollStatusWrapper()
     },
     methods: {
       clicked (){
         console.log('oi')
         this.$router.push('/about');
       },
-      
+      async pollStatus(){
+        console.log('getting data')      
+          await axios 
+            .get('/api/status')
+            .then(response =>{
+              console.log(response)
+              this.status = response.currentStatus
+              
+            }).catch(error => {
+              console.log(error)
+            })
+      },
+      pollStatusWrapper() {
+        setInterval(this.pollStatus, 4000)
+      },
     },
     components:{
       std_but,
