@@ -26,9 +26,10 @@ def input(request):
 @csrf_exempt
 def status(request):
     if request.method == 'POST':
-        hdw_status = StatusMessage(msg = json.loads(request.body.decode('utf-8'))['status'])
-        if hdw_status:
-            hdw_status.save()
+        print(request.body)
+        row = StatusMessage.objects.get(id=1)
+        row.msg = request.body.decode('utf-8')
+        row.save()
         return HttpResponse("YAY")
     elif request.method == 'GET':
         if StatusMessage.objects.last().msg == 'playing':

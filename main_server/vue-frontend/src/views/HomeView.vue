@@ -9,8 +9,19 @@
     </p>
 
     <h2>Robot status</h2>
-    {{this.status}}
-    <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "cunt"/>
+    <div id = statusIndicator class="statusYellow">
+      {{this.status}}
+    </div>
+    <!-- <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "cunt"/> -->
+
+    <h2>Robot Locker</h2>
+    <p>
+      Use the toggle to lock 
+    </p>
+
+    <h2>Music selector</h2>
+    <p>Select from your choice of music here</p>
+    <drop_down>Tetis</drop_down>
 
 
   </div>
@@ -18,12 +29,13 @@
 
 <script>
   import axios from 'axios'
-  import std_but from '/src/components/std_but.vue'
+  import drop_down from '/src/components/drop_down.vue'
+  // import std_but from '/src/components/std_but.vue'
   export default {
     name: 'homePage',
     data() { 
       return{
-        status: 'no data'
+        status: 'Loading'
       }
     }, mounted (){
       this.pollStatusWrapper()
@@ -34,14 +46,24 @@
         this.$router.push('/about');
       },
       async pollStatus(){
-        console.log('getting data')      
+        console.log('getting data') 
+        var elem = document.getElementById("statusIndicator")    
           await axios 
             .get('/api/status')
             .then(response =>{
               console.log(response)
-              this.status = response.currentStatus
+
+              if(this.status == 'PLAYING'){
+                elem.className = "statusGreen"
+              }
+              
+              this.status = response.data
+
+              
               
             }).catch(error => {
+              elem.className = "statusRed"
+              this.status = "Failed to fetch status of robot"
               console.log(error)
             })
       },
@@ -50,7 +72,7 @@
       },
     },
     components:{
-      std_but,
+      drop_down,
     }
   }
 </script>
@@ -122,6 +144,36 @@
     border-radius: 4px;
     border: none;
   }
+
+  .statusGreen{
+    background-color: rgb(0,112,60);
+    color:white;
+    border-color: grey;
+  }
+
+  .statusRed{
+    background-color: rgb(227,24,55);
+    color:white;
+    border-color: grey;
+  }
+
+  .statusYellow{
+    background-color: rgb(255,210,0);
+    color:black;
+    border-color: black;
+    border-style: solid;
+  }
+
+  #statusIndicator{
+    min-height: 50px;
+    text-align: center;
+    line-height: 100px; 
+    font-weight: bold;
+    font-size: 25px;
+    border-radius: 4px;
+    border-style: solid;
+  }
+
 
 
 </style>

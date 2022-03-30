@@ -99,8 +99,31 @@ import axios from 'axios'
         async submitForm(){
           var pattern = /^(([A-GR][1-9]+)*)$/
           console.log(pattern.test(this.typedscript))
+
+
+          if(!pattern.test(this.typedscript)){
+            console.log('inputerr')
+            this.showBar('Input error. Please study the input format in detail.', '')
+            return
+          }
+
+          
+          var p = this.isFree()
+          console.log("checking server is free?")
+          console.log(p)
+
+          if (this.isFree() == 0){
+            console.log('robot playing')
+            this.showBar('The robot is currently playing music. Please try again later','')
+            return
+          }
+
+          if(this.isFree() == 2){
+            this.showBar("Server error. Please try again later.",'')
+            return
+          }
          
-         if(pattern.test(this.typedscript)){
+         else {
             console.log('submitted, typed')
             const request = {
               type: 'MusicInTyped',
@@ -118,10 +141,7 @@ import axios from 'axios'
                 console.log(error)
                 this.showBar("Server error. Please try again later.",'')
               })
-          } else {
-            console.log('inputerr')
-            this.showBar('Input error. Please study the input format in detail.', '')
-          }
+          } 
         },async submitBut(){
           console.log('submitted, button')
           const request = {
@@ -149,6 +169,27 @@ import axios from 'axios'
           redirectHome(){
             this.$router.push('/')
           },
+           isFree(){
+            console.log('getting data')     
+            axios 
+              .get('/api/status')
+              .then(response =>{
+                console.log("The data")
+                console.log(response.data)
+
+                if(response.data == 'FREE'){
+                  console.log("returning true")
+                  return 1
+                } else {
+                  return 0
+                }
+              
+              }).catch(error => {
+                console.log(error)
+                console.log("Returning false because server err")
+                return 2
+              })
+          }
     }
        
     }
