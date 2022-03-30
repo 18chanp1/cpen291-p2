@@ -35,7 +35,7 @@ def status(request):
         if StatusMessage.objects.get(id=1).msg == 'playing':
             return HttpResponse("PLAYING") #TODO: should change to related playing page here
         elif StatusMessage.objects.get(id=1).msg == 'free':
-            return render(request, template_name = 'index.html')
+            return HttpResponse("FREE")
 
 @csrf_exempt
 def selection(request):
