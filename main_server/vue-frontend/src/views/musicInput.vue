@@ -101,15 +101,25 @@ import axios from 'axios'
           console.log(pattern.test(this.typedscript))
 
 
-          if(pattern.test(this.typedscript)){
+          if(!pattern.test(this.typedscript)){
             console.log('inputerr')
             this.showBar('Input error. Please study the input format in detail.', '')
             return
           }
 
-          if (!this.pollStatus()){
+          
+          var p = this.isFree()
+          console.log("checking server is free?")
+          console.log(p)
+
+          if (this.isFree() == 0){
             console.log('robot playing')
             this.showBar('The robot is currently playing music. Please try again later','')
+            return
+          }
+
+          if(this.isFree() == 2){
+            this.showBar("Server error. Please try again later.",'')
             return
           }
          
@@ -159,22 +169,25 @@ import axios from 'axios'
           redirectHome(){
             this.$router.push('/')
           },
-          async pollStatus(){
+           isFree(){
             console.log('getting data')     
-            await axios 
+            axios 
               .get('/api/status')
               .then(response =>{
-                console.log(response)
+                console.log("The data")
+                console.log(response.data)
 
-                if(this.status == 'FREE'){
-                  return true
+                if(response.data == 'FREE'){
+                  console.log("returning true")
+                  return 1
                 } else {
-                  return false
+                  return 0
                 }
               
               }).catch(error => {
                 console.log(error)
-                return false
+                console.log("Returning false because server err")
+                return 2
               })
           }
     }
