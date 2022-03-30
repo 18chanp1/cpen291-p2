@@ -24,5 +24,6 @@ urlpatterns = [
     path('musicinput', views.index, name = 'index'),
     path('statsPage', views.index, name = 'index'),
     path('about', views.index, name = 'index'),
-    path('api/input/', views.input, name='input')
+    path('api/input/', views.input, name='input'),
+    path('api/status/', views.status, name = 'status')
 ]
