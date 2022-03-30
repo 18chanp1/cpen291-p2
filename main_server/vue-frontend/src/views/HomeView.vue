@@ -14,15 +14,22 @@
     </div>
     <!-- <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "cunt"/> -->
 
-    <h2>Robot Locker</h2>
+    <h2>Robot Mode</h2>
     <p>
-      Use the toggle to lock 
+      Use the toggle to select the mode of operation for the robot. 
     </p>
+
+    <label class="switch">
+      <input @click = "submitMode()" v-model = "selector" type="checkbox">
+      <span class="slider"></span>
+    </label>
+
 
     <h2>Music selector</h2>
     <p>Select from your choice of music here</p>
+    <div class = dd>
     <drop_down>Tetis</drop_down>
-
+    </div>
 
   </div>
 </template>
@@ -35,7 +42,8 @@
     name: 'homePage',
     data() { 
       return{
-        status: 'Loading'
+        status: 'Loading',
+        selector: true,
       }
     }, mounted (){
       this.pollStatusWrapper()
@@ -70,6 +78,34 @@
       pollStatusWrapper() {
         setInterval(this.pollStatus, 4000)
       },
+      async submitMode(){
+        console.log('submitted, typed')
+            var opmode
+            if(this.selector == false){
+              opmode = 'online'
+            }
+            if(this.selector == true){
+              opmode = 'arduino'
+            }
+
+            const request = {
+              type: 'changeMode',
+              arguments: opmode,
+            }
+            
+            await axios 
+              .post('/api/toggle/', request)
+              .then(response =>{
+                console.log(response)
+                
+              }).catch(error => {
+                console.log(error)
+                setTimeout(this.reverseSelect, 500)
+              })
+      },
+      reverseSelect() {
+        this.selector = !this.selector
+      }
     },
     components:{
       drop_down,
@@ -173,6 +209,73 @@
     border-radius: 4px;
     border-style: solid;
   }
+
+  .dd{
+    margin-bottom: 5em;
+  }
+
+   /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
 
 
 
