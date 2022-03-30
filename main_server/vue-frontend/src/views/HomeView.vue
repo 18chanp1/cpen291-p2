@@ -19,12 +19,17 @@
       Use the toggle to lock 
     </p>
 
+    <h2>Music selector</h2>
+    <p>Select from your choice of music here</p>
+    <drop_down>Tetis</drop_down>
+
 
   </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import drop_down from '/src/components/drop_down.vue'
   // import std_but from '/src/components/std_but.vue'
   export default {
     name: 'homePage',
@@ -67,7 +72,7 @@
       },
     },
     components:{
-      // std_but,
+      drop_down,
     }
   }
 </script>
