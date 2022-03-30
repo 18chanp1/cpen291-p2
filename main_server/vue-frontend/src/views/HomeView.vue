@@ -88,6 +88,7 @@
             })
       },
       pollStatusWrapper() {
+        this.pollStatus()
         setInterval(this.pollStatus, 4000)
       },
       async submitMode(){
