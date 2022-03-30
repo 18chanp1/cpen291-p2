@@ -23,12 +23,13 @@ def input(request):
 @csrf_exempt
 def status(request):
     if request.method == 'POST':
-        hdw_status = StatusMessage(msg = json.loads(request.body.decode('utf-8'))['status'])
+        print(request.body)
+        hdw_status = StatusMessage(msg = request.body.decode('utf-8'))
         if hdw_status:
             hdw_status.save()
         return HttpResponse("YAY")
     elif request.method == 'GET':
         if StatusMessage.objects.last().msg == 'playing':
             return HttpResponse("PLAYING") #TODO: should change to related playing page here
-        elif StatusMessage.objects.last().msg == 'free':
+        elif StatusMessage.objects.last().msg == 'free' or None:
             return render(request, template_name = 'index.html')
