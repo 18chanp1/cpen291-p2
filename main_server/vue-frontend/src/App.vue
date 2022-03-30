@@ -8,6 +8,11 @@
   <router-view/>
 </template>
 
+
+<script>
+
+</script>
+
 <style>
 
 @font-face{

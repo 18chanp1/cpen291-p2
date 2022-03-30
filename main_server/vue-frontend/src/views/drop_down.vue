@@ -16,6 +16,7 @@
 <script>
   import axios from 'axios'
   import std_but from "/src/components/std_but.vue"
+  import VueCookies from 'vue-cookies'
 
   export default {
     data() {
@@ -41,8 +42,17 @@
             type: 'MusicSelection',
             arguments: this.box_in,
           }
+
+
+          console.log("COOKIE")
+          if($cookies.isKey(this.box_in)){
+            $cookies.set(this.box_in, $cookies.get(this.box_in) + 1)
+          } else {
+            $cookies.set(this.box_in, 1)
+            
+          }
           
-          console.log("submitting box items")
+          console.log("submitting box itemss")
           if(this.isFree() == 0){
             this.showBar("Device is currently playing music, please try again later",'')
             return

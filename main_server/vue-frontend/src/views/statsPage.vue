@@ -12,7 +12,7 @@
         <td>{{this.lifnote}}</td>
       </tr>
       <tr>
-        <th>Total song uploads</th>
+        <th>Total song plays</th>
         <td>{{this.songs}}</td>
       </tr>
     </table>
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     name: 'statsPage',
     data() { 
@@ -31,23 +30,12 @@
       }
     },
     mounted(){
-      this.getData()
+      this.cookiedata()
     },
     methods: {
-      async getData() {
-          console.log('getting data')      
-          await axios 
-            .get('/api/stats')
-            .then(response =>{
-              console.log(response)
-              this.favnote = response.favoriteNote
-              this.lifnote = response.lifetimeNotes
-              this.songs = response.numberOfSongs
-              
-            }).catch(error => {
-              console.log(error)
-            })
-          },
+      cookiedata(){
+        this.songs = window.$cookies.get("sum")
+      }
       
     }
   }

@@ -60,6 +60,19 @@
               console.log(response)
               this.showBar("Submission accepted. You will now be redirected home", 'G')
               setTimeout(this.redirectHome, 2500)
+
+              if(window.$cookies.isKey(this.box_in)){
+              window.$cookies.set(this.box_in, (parseInt(window.$cookies.get(this.box_in)) + 1))
+            
+              } else {
+                window.$cookies.set(this.box_in, "1")
+              }
+
+          if(window.$cookies.isKey("sum")){
+            window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
+          } else {
+            window.$cookies.set("sum", "1")
+          }
             }).catch(error => {
               console.log(error)
               this.showBar("Server error. Please try again later.",'')

@@ -48,6 +48,7 @@
 <script>
   import axios from 'axios'
   import drop_down from '/src/components/drop_down.vue'
+
   // import std_but from '/src/components/std_but.vue'
   export default {
     name: 'homePage',

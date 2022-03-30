@@ -74,6 +74,7 @@
 <script>
 import std_but from "/src/components/std_but.vue"
 import axios from 'axios'
+
   export default{
     
     name: 'musicInput',
@@ -97,7 +98,7 @@ import axios from 'axios'
           this.script=''
         },
         async submitForm(){
-          var pattern = /^(([A-GR][1-9]+)*)$/
+          var pattern = /^(([A-GR][0-9]+)*)$/
           console.log(pattern.test(this.typedscript))
 
 
@@ -134,6 +135,13 @@ import axios from 'axios'
               .post('/api/input/', request)
               .then(response =>{
                 console.log(response)
+
+                if(window.$cookies.isKey("sum")){
+                  window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
+                } else {
+                  window.$cookies.set("sum", "1")
+                }
+
                 this.showBar("Submission accepted. You will now be redirected home", 'G')
                 setTimeout(this.redirectHome, 2500)
                 
@@ -148,11 +156,33 @@ import axios from 'axios'
             type: 'MusicInButtoned',
             arguments: this.script,
           }
+
+          var p = this.isFree()
+          console.log("checking server is free?")
+          console.log(p)
+
+          if (this.isFree() == 0){
+            console.log('robot playing')
+            this.showBar('The robot is currently playing music. Please try again later','')
+            return
+          }
+
+          if(this.isFree() == 2){
+            this.showBar("Server error. Please try again later.",'')
+            return
+          }
           
           await axios 
             .post('/api/input/', request)
             .then(response =>{
               console.log(response)
+              
+              if(window.$cookies.isKey("sum")){
+                window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
+              } else {
+                window.$cookies.set("sum", "1")
+              }
+
               this.showBar("Submission accepted. You will now be redirected home", 'G')
               setTimeout(this.redirectHome, 2500)
             }).catch(error => {
