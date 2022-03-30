@@ -44,7 +44,7 @@
             .get('/api/status')
             .then(response =>{
               console.log(response)
-              this.status = response
+              this.status = response.data
               
             }).catch(error => {
               console.log(error)
