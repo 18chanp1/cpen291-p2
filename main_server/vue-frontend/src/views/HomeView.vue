@@ -19,10 +19,21 @@
       Use the toggle to select the mode of operation for the robot. 
     </p>
 
-    <label class="switch">
-      <input @click = "submitMode()" v-model = "selector" type="checkbox">
-      <span class="slider"></span>
-    </label>
+
+    <div class = "switchNLabels">
+      
+      <div>Device Control</div>
+      <div>
+        <label class="switch">
+        <input @click = "submitMode()" v-model = "selector" type="checkbox">
+        <span class="slider"></span>
+        </label>
+      </div>
+      <div>Web control</div>
+
+
+    </div>
+    
 
 
     <h2>Music selector</h2>
@@ -276,6 +287,17 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 } 
+
+.switchNLabels{
+  display: flex;
+  flex-grow: 1;
+}
+
+.switchNLabels > div {
+  margin: auto;
+  text-align: left;
+  margin-top: 20px;
+}
 
 
 
