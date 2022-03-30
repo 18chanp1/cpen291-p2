@@ -29,6 +29,6 @@ def status(request):
         return HttpResponse("YAY")
     elif request.method == 'GET':
         if StatusMessage.msg == 'playing':
-            return render(request, template_name = 'index.html') #TODO: should change to related playing page here
+            return HttpResponse("PLAYING") #TODO: should change to related playing page here
         elif StatusMessage.msg == 'free':
             return render(request, template_name = 'index.html')
