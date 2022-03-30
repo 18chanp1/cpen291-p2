@@ -27,14 +27,14 @@ def input(request):
 def status(request):
     if request.method == 'POST':
         print(request.body)
-        row = StatusMessage.objects.get(id=1)
-        row.msg = request.body.decode('utf-8')
-        row.save()
-        return HttpResponse("YAY")
+        arduino_status = StatusMessage.objects.get(id=1)
+        arduino_status.msg = request.body.decode('utf-8')
+        arduino_status.save()
+        return HttpResponse("saved")
     elif request.method == 'GET':
-        if StatusMessage.objects.last().msg == 'playing':
+        if StatusMessage.objects.get(id=1).msg == 'playing':
             return HttpResponse("PLAYING") #TODO: should change to related playing page here
-        elif StatusMessage.objects.last().msg == 'free':
+        elif StatusMessage.objects.get(id=1).msg == 'free':
             return render(request, template_name = 'index.html')
 
 @csrf_exempt
@@ -49,3 +49,14 @@ def selection(request):
             return HttpResponse("invalid input")
     elif request.method == 'GET':
         return HttpResponse(MusicSelection.objects.last().notes)
+    
+@csrf_exempt
+def toggle(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        control_mode = StatusMessage.objects.get(id=2)
+        control_mode.msg = data['arguments']
+        control_mode.save()
+        return HttpResponse("saved")
+    elif request.method == 'GET':
+        return HttpResponse(StatusMessage.objects.get(id=2).msg)
