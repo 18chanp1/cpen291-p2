@@ -1,7 +1,7 @@
 import json
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import MusicNotes, StatusMessage
+from .models import MusicNotes, StatusMessage, MusicSelection
 from django.views.decorators.csrf import csrf_exempt
 
 def test(request):
@@ -13,10 +13,13 @@ def index(request):
 @csrf_exempt
 def input(request):
     if request.method == 'POST':
-        music_input = MusicNotes(notes=json.loads(request.body.decode('utf-8'))["arguments"])
+        data = json.loads(request.body.decode('utf-8'))
+        music_input = MusicNotes(notes=data["arguments"])
         if music_input:
             music_input.save()
-        return HttpResponse("YAY")
+            return HttpResponse("YAY")
+        else:
+            return HttpResponse("Invalid Input")
     elif request.method == 'GET':
         return HttpResponse(MusicNotes.objects.last().notes)
 
@@ -30,8 +33,19 @@ def status(request):
         return HttpResponse("YAY")
     elif request.method == 'GET':
         if StatusMessage.objects.last().msg == 'playing':
-            return HttpResponse("PLAYING") 
-        elif StatusMessage.objects.last().msg == 'free' or None:
-            return HttpResponse("FREE")
+            return HttpResponse("PLAYING") #TODO: should change to related playing page here
+        elif StatusMessage.objects.last().msg == 'free':
+            return render(request, template_name = 'index.html')
 
-
+@csrf_exempt
+def selection(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        music_selection = MusicSelection(selection = data['arguments'])
+        if music_selection:
+            music_selection.save()
+            return HttpResponse("YAY")
+        else:
+            return HttpResponse("invalid input")
+    elif request.method == 'GET':
+        return HttpResponse(MusicSelection.objects.last().notes)

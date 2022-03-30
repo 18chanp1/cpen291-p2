@@ -25,5 +25,6 @@ urlpatterns = [
     path('statsPage', views.index, name = 'index'),
     path('about', views.index, name = 'index'),
     path('api/input/', views.input, name='input'),
-    path('api/status/', views.status, name = 'status')
+    path('api/status/', views.status, name = 'status'),
+    path('api/selection/', views.selection, name = 'selection'),
 ]
