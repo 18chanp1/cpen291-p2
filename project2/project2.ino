@@ -404,83 +404,92 @@ void LEDsong1(short time, short pause){
     delay(pause);
     digitalWrite(LED7, LOW);
   }
+  else if (time == 0){
+    delay(pause);
+  }
 }
 void LEDsong2(short time, short pause){
-  if (time == 1319 || time == 1568){
+  if (time == 2093){
     digitalWrite(LED1, HIGH);
     delay(pause);
     digitalWrite(LED1, LOW);
   }
-  else if (time == 1760 || time == 1865){
+  else if (time == 2349){
     digitalWrite(LED2, HIGH);
     delay(pause);
     digitalWrite(LED2, LOW);
   }
-  else if (time == 1976 || time == 2093){
+  else if (time == 2637){
     digitalWrite(LED3, HIGH);
     delay(pause);
     digitalWrite(LED3, LOW);
   }
-  else if (time == 2349){
+  else if (time == 2794){
     digitalWrite(LED4, HIGH);
     delay(pause);
     digitalWrite(LED4, LOW);
   }
-  else if (time == 2637 || time == 2794){
+  else if (time == 1568 || time == 3136){
     digitalWrite(LED5, HIGH);
     delay(pause);
     digitalWrite(LED5, LOW);
   }
-  else if (time == 3136){
+  else if (time == 1760 || time == 1865 || time == 3520){
     digitalWrite(LED6, HIGH);
     delay(pause);
     digitalWrite(LED6, LOW);
   }
-  else if (time == 3520){
+  else if (time == 1976){
     digitalWrite(LED7, HIGH);
     delay(pause);
     digitalWrite(LED7, LOW);
+  }
+  else if (time == 0){
+    delay(pause);
   }
 }
 void LEDsong3(short time, short pause){
-  if (time == 0 || time == 220 || time == 247){
+  if (time == 277 || time == 554 || time == 1109){
     digitalWrite(LED1, HIGH);
     delay(pause);
     digitalWrite(LED1, LOW);
   }
-  else if (time == 277 || time == 294 || time == 330){
+  else if (time == 294 || time == 587 || time == 1175){
     digitalWrite(LED2, HIGH);
     delay(pause);
     digitalWrite(LED2, LOW);
   }
-  else if (time == 370 || time == 415 || time == 440){
+  else if (time == 330 || time == 659 || time == 1319){
     digitalWrite(LED3, HIGH);
     delay(pause);
     digitalWrite(LED3, LOW);
   }
-  else if (time == 494 || time == 554 || time == 587){ //0 220 247 277 294 330 370 415 440 494 554 587 
+  else if (time == 370 || time == 740 || time == 1480){
     digitalWrite(LED4, HIGH);
     delay(pause);
     digitalWrite(LED4, LOW);
   }
-  else if (time == 659 || time == 740 || time == 880){
+  else if (time == 415 || time == 1661){
     digitalWrite(LED5, HIGH);
     delay(pause);
     digitalWrite(LED5, LOW);
   }
-  else if (time == 988 || time == 1109 || time == 1175){
+  else if (time == 220 || time == 440 || time == 880){
     digitalWrite(LED6, HIGH);
     delay(pause);
     digitalWrite(LED6, LOW);
   }
-  else if (time == 1319 || time == 1480 || time == 1661){
+  else if (time == 247 || time == 494 || time == 988){
     digitalWrite(LED7, HIGH);
     delay(pause);
     digitalWrite(LED7, LOW);
   }
+  else if (time == 0){
+    delay(pause);
+  }
 }
 
-void LEDimput(char note, short pause){
+void LEDinput(char note, short pause){
   if (note == 'C' || note == 'c'){
     digitalWrite(LED1, HIGH);
     delay(pause);
@@ -647,7 +656,7 @@ void InputMakingSound (char note, int playTime){
   short noteDuration = 100 * playTime;
   tone(melodyPin, noteFeq);
   short pauseBetweenNotes = noteDuration;
-  LEDimput(note, pauseBetweenNotes);
+  LEDinput(note, pauseBetweenNotes);
   delay(100);
   noTone(melodyPin);
 }
@@ -707,9 +716,9 @@ void sing(short s) {
     for (short thisNote = 0; thisNote < size; thisNote++) {
       short noteDuration = 1000 / tempo[thisNote];
       buzz(melodyPin, melody[thisNote], noteDuration);
-      short pauseBetweenNotes = noteDuration * 1.0;
+      short pauseBetweenNotes = noteDuration * 1.3;
       LEDsong2(melody[thisNote], pauseBetweenNotes);
-      delay(pauseBetweenNotes);
+      //delay(pauseBetweenNotes);
       buzz(melodyPin, 0, noteDuration);
     }
   }
