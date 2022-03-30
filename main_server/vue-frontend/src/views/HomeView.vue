@@ -12,6 +12,11 @@
     {{this.status}}
     <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "cunt"/>
 
+    <h2>Robot Locker</h2>
+    <p>
+      Use the toggle to lock 
+    </p>
+
 
   </div>
 </template>
@@ -39,7 +44,7 @@
             .get('/api/status')
             .then(response =>{
               console.log(response)
-              this.status = response.currentStatus
+              this.status = response
               
             }).catch(error => {
               console.log(error)
