@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/input/', views.input, name='input'),
     path('api/status/', views.status, name = 'status'),
     path('api/selection/', views.selection, name = 'selection'),
+    path('api/toggle/', views.toggle, name = 'toggle'),
 ]
