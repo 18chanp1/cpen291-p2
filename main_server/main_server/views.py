@@ -54,9 +54,9 @@ def selection(request):
 def toggle(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        control_mode = StatusMessage.objects.get(id=2)
+        control_mode = StatusMessage.objects.get(id=0)
         control_mode.msg = data['arguments']
         control_mode.save()
         return HttpResponse("saved")
     elif request.method == 'GET':
-        return HttpResponse(StatusMessage.objects.get(id=2).msg)
+        return HttpResponse(StatusMessage.objects.get(id=0).msg)
