@@ -5,3 +5,6 @@ class MusicNotes(models.Model):
     
 class StatusMessage(models.Model):
     msg = models.CharField(max_length=10000)
+    
+class MusicSelection(models.Model):
+    selection = models.CharField(max_length=10000)
