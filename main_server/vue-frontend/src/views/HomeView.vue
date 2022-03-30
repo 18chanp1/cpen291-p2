@@ -84,7 +84,7 @@
             }).catch(error => {
               elem.className = "statusRed"
               this.status = "Failed to fetch status of robot"
-              console.log(error)
+              console.log(error.status)
             })
       },
       pollStatusWrapper() {
@@ -111,7 +111,7 @@
                 console.log(response)
                 
               }).catch(error => {
-                console.log(error)
+                console.log(error.status)
                 setTimeout(this.reverseSelect, 500)
               })
       },

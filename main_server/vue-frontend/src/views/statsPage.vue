@@ -35,6 +35,26 @@
     methods: {
       cookiedata(){
         this.songs = window.$cookies.get("sum")
+
+        var max = window.$cookies.get('A');
+        var maxChr = 'A';
+        var totalNote = 0
+
+        for(var i = 0; i < 26; i++){
+          var chr = String.fromCharCode(65 + i);
+          var curr = window.$cookies.get(chr);
+
+          totalNote = totalNote + parseInt(curr)
+
+          if(curr > max){
+            max = curr
+            maxChr = chr
+          }
+
+        }
+
+        this.favnote = maxChr
+        this.lifnote = totalNote
       }
       
     }

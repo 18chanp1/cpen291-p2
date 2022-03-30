@@ -43,14 +43,8 @@
             arguments: this.box_in,
           }
 
-
           console.log("COOKIE")
-          if($cookies.isKey(this.box_in)){
-            $cookies.set(this.box_in, $cookies.get(this.box_in) + 1)
-          } else {
-            $cookies.set(this.box_in, 1)
-            
-          }
+          $cookies.set(this.box_in, parseInt($cookies.get(this.box_in)) + 1)
           
           console.log("submitting box itemss")
           if(this.isFree() == 0){
@@ -58,7 +52,7 @@
             return
           }
 
-          if (this.isFree == 2){
+          if (this.isFree() == 2){
             this.showBar("Cannot reach device, please try again later",'')
             return
           }
@@ -71,7 +65,7 @@
               this.showBar("Submission accepted. You will now be redirected home", 'G')
               setTimeout(this.redirectHome, 2500)
             }).catch(error => {
-              console.log(error)
+              console.log(error.status)
               this.showBar("Server error. Please try again later.",'')
             })
       },

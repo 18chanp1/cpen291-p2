@@ -136,17 +136,22 @@ import axios from 'axios'
               .then(response =>{
                 console.log(response)
 
-                if(window.$cookies.isKey("sum")){
-                  window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
-                } else {
-                  window.$cookies.set("sum", "1")
+                window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
+
+                var isLetter = /^[A-GR]$/
+
+                for(var i = 0; i < this.typedscript.length; i++ ){
+                  var letter = this.typedscript.charAt(i)
+                  if(isLetter.test(letter)){
+                    window.$cookies.set(letter, (parseInt(window.$cookies.get(letter)) + 1))
+                  }
                 }
 
                 this.showBar("Submission accepted. You will now be redirected home", 'G')
                 setTimeout(this.redirectHome, 2500)
                 
               }).catch(error => {
-                console.log(error)
+                console.log(error.status)
                 this.showBar("Server error. Please try again later.",'')
               })
           } 
@@ -176,12 +181,17 @@ import axios from 'axios'
             .post('/api/input/', request)
             .then(response =>{
               console.log(response)
-              
-              if(window.$cookies.isKey("sum")){
-                window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
-              } else {
-                window.$cookies.set("sum", "1")
+
+              var isLetter = /^[A-GR]$/
+
+              for(var i = 0; i < this.script.length; i++ ){
+                var letter = this.script.charAt(i)
+                if(isLetter.test(letter)){
+                  window.$cookies.set(letter, (parseInt(window.$cookies.get(letter)) + 1))
+                }
               }
+              
+              window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
 
               this.showBar("Submission accepted. You will now be redirected home", 'G')
               setTimeout(this.redirectHome, 2500)
@@ -215,7 +225,7 @@ import axios from 'axios'
                 }
               
               }).catch(error => {
-                console.log(error)
+                console.log(error.status)
                 console.log("Returning false because server err")
                 return 2
               })
