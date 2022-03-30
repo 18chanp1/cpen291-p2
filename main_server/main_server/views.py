@@ -28,7 +28,7 @@ def status(request):
             hdw_status.save()
         return HttpResponse("YAY")
     elif request.method == 'GET':
-        if StatusMessage.msg == 'playing':
+        if StatusMessage.objects.last().msg == 'playing':
             return HttpResponse("PLAYING") #TODO: should change to related playing page here
-        elif StatusMessage.msg == 'free':
+        elif StatusMessage.objects.last().msg == 'free':
             return render(request, template_name = 'index.html')
