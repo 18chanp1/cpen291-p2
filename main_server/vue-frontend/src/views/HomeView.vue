@@ -140,16 +140,20 @@
   .statusGreen{
     background-color: rgb(0,112,60);
     color:white;
+    border-color: grey;
   }
 
   .statusRed{
     background-color: rgb(227,24,55);
     color:white;
+    border-color: grey;
   }
 
   .statusYellow{
     background-color: rgb(255,210,0);
     color:black;
+    border-color: black;
+    border-style: solid;
   }
 
   #statusIndicator{
@@ -159,6 +163,7 @@
     font-weight: bold;
     font-size: 25px;
     border-radius: 4px;
+    border-style: solid;
   }
 
 
