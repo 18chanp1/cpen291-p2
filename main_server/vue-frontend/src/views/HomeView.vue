@@ -47,11 +47,14 @@
             .get('/api/status')
             .then(response =>{
               console.log(response)
-              this.status = response.data
 
               if(this.status == 'PLAYING'){
                 elem.className = "statusGreen"
               }
+              
+              this.status = response.data
+
+              
               
             }).catch(error => {
               elem.className = "statusRed"

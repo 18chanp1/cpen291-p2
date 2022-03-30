@@ -99,8 +99,21 @@ import axios from 'axios'
         async submitForm(){
           var pattern = /^(([A-GR][1-9]+)*)$/
           console.log(pattern.test(this.typedscript))
+
+
+          if(pattern.test(this.typedscript)){
+            console.log('inputerr')
+            this.showBar('Input error. Please study the input format in detail.', '')
+            return
+          }
+
+          if (!this.pollStatus()){
+            console.log('robot playing')
+            this.showBar('The robot is currently playing music. Please try again later','')
+            return
+          }
          
-         if(pattern.test(this.typedscript)){
+         else {
             console.log('submitted, typed')
             const request = {
               type: 'MusicInTyped',
@@ -118,10 +131,7 @@ import axios from 'axios'
                 console.log(error)
                 this.showBar("Server error. Please try again later.",'')
               })
-          } else {
-            console.log('inputerr')
-            this.showBar('Input error. Please study the input format in detail.', '')
-          }
+          } 
         },async submitBut(){
           console.log('submitted, button')
           const request = {
@@ -149,6 +159,24 @@ import axios from 'axios'
           redirectHome(){
             this.$router.push('/')
           },
+          async pollStatus(){
+            console.log('getting data')     
+            await axios 
+              .get('/api/status')
+              .then(response =>{
+                console.log(response)
+
+                if(this.status == 'FREE'){
+                  return true
+                } else {
+                  return false
+                }
+              
+              }).catch(error => {
+                console.log(error)
+                return false
+              })
+          }
     }
        
     }
