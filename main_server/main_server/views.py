@@ -24,12 +24,14 @@ def input(request):
 def status(request):
     if request.method == 'POST':
         print(request.body)
-        hdw_status = StatusMessage(msg = request.body.decode('utf-8'))
-        if hdw_status:
-            hdw_status.save()
+        row = StatusMessage.objects.get(id=1)
+        row.msg = request.body.decode('utf-8')
+        row.save()
         return HttpResponse("YAY")
     elif request.method == 'GET':
         if StatusMessage.objects.last().msg == 'playing':
-            return HttpResponse("PLAYING") #TODO: should change to related playing page here
+            return HttpResponse("PLAYING") 
         elif StatusMessage.objects.last().msg == 'free' or None:
-            return render(request, template_name = 'index.html')
+            return HttpResponse("FREE")
+
+
