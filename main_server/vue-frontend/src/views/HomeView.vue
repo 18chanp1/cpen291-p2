@@ -78,7 +78,7 @@
               }
 
               if(this.status == 'FREE'){
-                elem.className = "statusYellow"
+                elem.className = "statusBlue"
               }
               
               this.status = response.data
@@ -212,6 +212,12 @@
 
   .statusYellow{
     background-color: rgb(255,210,0);
+    color:black;
+    border-color: black;
+    border-style: solid;
+  }
+  .statusBlue{
+    background-color: rgb(0,121,193);
     color:black;
     border-color: black;
     border-style: solid;
