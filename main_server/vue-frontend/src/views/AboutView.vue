@@ -9,7 +9,12 @@
         </td>
         <td style = "width: 50%;">
           <h2>James Chuang</h2>
-            Backend database management and API handler
+            Backend database management and API handler. 
+            <br/>
+            Born to owners of Taiwan Semiconductor
+            Manufacturing Company (TSMC), he roamed free around the research and manufacturing fabs.
+            He was always interested in leading edge computing hardware and began assisting the design
+            of chips at TSMC at a very young age. 
         </td>
       </tr>
       <tr>
@@ -19,6 +24,10 @@
         <td style = "width: 50%;">
           <h2>Vanessa Quon</h2>
             Backend hardware interface developer.
+            <br/>
+            Founder of several startups in Silicon Valley, acting as an anonymous contributor to many
+            major programs, desktop and mobile. However, no one has ever confirmed the existence of 
+            this person, and has no idea who this person is. 
         </td>
       </tr>
       <tr>
@@ -28,6 +37,13 @@
         <td style = "width: 50%;">
           <h2>Zheng Xu</h2>
             Hardware constructor and acquisition manager. 
+
+            Child of a mad scientist, Zheng was always an inquirer of the world around him.
+            He seeks to understand the world around him. In fact, he holds the current class
+            record for most questions asked in lecture. He often asks provoking and thoughtful
+            questions that enable others to deepen their understanding. His primary contributions
+            to this projects include asking probing questions about the quality of other team members'
+            code. In fact, he asks more questions than lines of code he has written. 
         </td>
       </tr>
       <tr>
@@ -37,6 +53,11 @@
         <td style = "width: 50%;">
           <h2>Paco Chan</h2>
             Frontend designer. 
+
+            Enjoys looking at attractive things and people. Originally considering a degree in design,
+            the harsh reality of high unemployment in Canada forced him to reconsider his choices. 
+            Although he is disatisfied with his choices in life, and does not enjoy staring at code all day,
+            he regrets nothing and would pick this path again. 
         </td>
       </tr>
       
