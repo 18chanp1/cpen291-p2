@@ -44,7 +44,15 @@ void draw() {
     if(!content.equals(lastContent)){  //get stream of notes from arduino 
       println("Reponse Content: " + content);
       lastContent = content;
-      myPort.write(content);
+      if(content.equals("Mario")){
+        myPort.write("M");
+      } else if(content.equals("RickRoll")){
+        myPort.write("R");
+      } else if (content.equals("GoukurakuJoudo")){
+        myPort.write("G");
+      } else {
+        myPort.write(content);
+      }
     }
     
     while(myPort.available() > 0){ //get response from arduino
@@ -54,18 +62,14 @@ void draw() {
         PostRequest post = new PostRequest("http://cpen291-20.ece.ubc.ca/api/status/");
         post.addData("playing");
         post.send();
-        println("sent");
         
       } else if (playStatus == 37) {
         PostRequest post = new PostRequest("http://cpen291-20.ece.ubc.ca/api/status/");
         post.addData("free");
         post.send();
-        println("sent");
-        lastContent = "";
       } 
     }
   } 
   
   rect(50, 50, 100, 100);         // Draw a square
-  delay(200);
 }
