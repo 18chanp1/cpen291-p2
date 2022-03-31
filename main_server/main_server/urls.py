@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
+# all the urls that can be reached, in the format of (path, view handle function, name)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.test, name = 'test'),
