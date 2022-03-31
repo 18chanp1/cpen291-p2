@@ -72,6 +72,8 @@
             .get('/api/status')
             .then(response =>{
               console.log(response)
+              
+              this.status = response.data
 
               if(this.status == 'PLAYING'){
                 elem.className = "statusGreen"
@@ -80,8 +82,6 @@
               if(this.status == 'FREE'){
                 elem.className = "statusBlue"
               }
-              
-              this.status = response.data
 
               
               
