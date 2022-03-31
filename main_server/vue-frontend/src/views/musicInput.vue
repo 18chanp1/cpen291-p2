@@ -258,11 +258,11 @@ import axios from 'axios'
           },
           save() {
             var curr = window.$cookies.get("songsz")
-            
+            curr++
             window.$cookies.set('S' + curr, this.script)
             window.$cookies.set("songsz", curr)
             alert("The song ID is: " + curr + ". \n You will need this ID to load the song, so keep it in a safe place")
-            curr++
+            
           },
           saveTyped() {
             var pattern = /^(([A-GR][0-9]+)*)$/
@@ -274,21 +274,22 @@ import axios from 'axios'
             }
             
             var curr = window.$cookies.get("songsz")
-            
+            curr++
             window.$cookies.set('S' + curr, this.typedscript)
             window.$cookies.set("songsz", curr)
             alert("The song ID is: " + curr + ". \n You will need this ID to load the song, so keep it in a safe place")
-            curr++
+            
           }, 
           load(){
             var pattern = /^[0-9]+$/
             var max = window.$cookies.get("songsz")
-            if(!pattern.test(this.songID) || parseInt(this.songID) >= max){
+            if(!pattern.test(this.songID) || parseInt(this.songID) > max){
               this.showBar("Song ID is invalid. Please try again.", "")
               console.log("bad load")
               return;
             }
             this.loaded = window.$cookies.get("S" + this.songID)
+            this.showBar("Loaded successfully", "G")
           },
           submitLoad(){
             console.log("sload")
@@ -384,6 +385,10 @@ import axios from 'axios'
 
 
 .flexbut:hover {
+  background-color: #1c578a;
+  outline:none;
+  }
+  .flexbut2:hover {
   background-color: #1c578a;
   outline:none;
   }
