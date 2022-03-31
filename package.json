@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "webpack-bundle-tracker": "^1.4.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-router": "~5.0.0"
-  }
-}
