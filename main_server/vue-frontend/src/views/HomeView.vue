@@ -76,6 +76,10 @@
               if(this.status == 'PLAYING'){
                 elem.className = "statusGreen"
               }
+
+              if(this.status == 'FREE'){
+                elem.className = "statusYellow"
+              }
               
               this.status = response.data
 

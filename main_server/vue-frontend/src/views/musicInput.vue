@@ -30,6 +30,7 @@
   <form @submit.prevent="submitForm">
     <textarea v-model = "typedscript">Input your music here.</textarea>
     <br/>
+    <std_but type = "button" @pressed-button = "saveTyped()" text = "Save" class = "flexbut"/>
     <input type="submit" value="Submit" class = "flexbut" id = "ButtonForSubmit">
   </form>   
   
@@ -39,6 +40,12 @@
     Push the buttons to input the corresponding note. The duration
     defaults to 1 RU.
   </p>
+
+  <p>
+      Your Input: 
+  </p>
+
+  <p class="inputdisp">{{this.script}} </p>
 
   <form @submit.prevent = "submitBut">
     <div class="noteInput">
@@ -52,21 +59,38 @@
       <std_but type = "button" @pressed-button = "clicked($event)" class="flexbut" text = "R"/>
     </div>
 
-    <p>
-      Your Input: 
-    </p>
-
-    <p class="inputdisp">{{this.script}} </p>
 
     <div class="submitButtons">
+    <std_but type = "button" @pressed-button = "save()" text = "Save" class = "flexbut2"/>
     <std_but type = "button" @pressed-button = "reset()" text = "Reset" class = "flexbut2"/>
     <std_but @pressed-button = "submit()" text = "Submit" class = "flexbut2"/>
     </div>
 
-    <div id="snackbar">{{error}}</div>
-    <div id="snackbarG">{{error}}</div>
-    
   </form>
+
+  <h2>Option 3: Load saved music</h2>
+  
+  <p>
+    Type in your song ID in the box below and press load to load your song. You can 
+    the press submit to submit the song to be played. 
+  </p>
+
+  
+    <textarea v-model = "songID" class = "idinput">Input your music here.</textarea>
+    <br/>
+   
+  
+  <std_but type = "button" @pressed-button = "load()" text = "Load" class = "flexbut2"/>
+  
+  <p>Loaded song: </p>
+  <p class="inputdisp">{{this.loaded}} </p>
+
+    
+  <std_but type="button" @pressed-button = 'submitLoad()' text="Submit" class = "flexbut2" id = "ButtonForSubmit"></std_but>
+
+  <div id="snackbar">{{error}}</div>
+  <div id="snackbarG">{{error}}</div>
+    
 
 </div>
 </template>
@@ -84,6 +108,8 @@ import axios from 'axios'
             script: '',
             typedscript:'',
             error: '',
+            songID:'',
+            loaded:'',
         }
     },
     components:{
@@ -229,6 +255,45 @@ import axios from 'axios'
                 console.log("Returning false because server err")
                 return 2
               })
+          },
+          save() {
+            var curr = window.$cookies.get("songsz")
+            
+            window.$cookies.set('S' + curr, this.script)
+            window.$cookies.set("songsz", curr)
+            alert("The song ID is: " + curr + ". \n You will need this ID to load the song, so keep it in a safe place")
+            curr++
+          },
+          saveTyped() {
+            var pattern = /^(([A-GR][0-9]+)*)$/
+
+            if(!pattern.test(this.typedscript)){
+              console.log('inputerr')
+              this.showBar('Input error. Please study the input format in detail.', '')
+              return
+            }
+            
+            var curr = window.$cookies.get("songsz")
+            
+            window.$cookies.set('S' + curr, this.typedscript)
+            window.$cookies.set("songsz", curr)
+            alert("The song ID is: " + curr + ". \n You will need this ID to load the song, so keep it in a safe place")
+            curr++
+          }, 
+          load(){
+            var pattern = /^[0-9]+$/
+            var max = window.$cookies.get("songsz")
+            if(!pattern.test(this.songID) || parseInt(this.songID) >= max){
+              this.showBar("Song ID is invalid. Please try again.", "")
+              console.log("bad load")
+              return;
+            }
+            this.loaded = window.$cookies.get("S" + this.songID)
+          },
+          submitLoad(){
+            console.log("sload")
+            this.typedscript = this.loaded
+            this.submitForm()
           }
     }
        
@@ -330,6 +395,7 @@ import axios from 'axios'
   min-height: 40px;
   border-style: solid;
   padding: 10px;
+  word-wrap: break-word;
 }
 .entryBox {
   width: 205px; height: 39px
@@ -406,8 +472,14 @@ textarea{
 @media only screen and (min-width: 768px){
   textarea{
     height : 15em;
-    width : 75ch;
+    width : 100%;
   }
+}
+
+.idinput{
+  max-height: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
   
 </style>

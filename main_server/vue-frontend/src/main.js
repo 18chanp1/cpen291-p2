@@ -15,4 +15,5 @@ if(!window.$cookies.isKey('A')){
     window.$cookies.set('RickRoll', '0')
     window.$cookies.set('GoukurakuJoudo', '0')
     window.$cookies.set('sum', '0')
+    window.$cookies.set('songsz', '0')
 }
