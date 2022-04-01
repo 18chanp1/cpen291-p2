@@ -36,8 +36,8 @@ def status(request):
     # post request from arduino with current status
     if request.method == 'POST':
         print(request.body)
-        arduino_status = StatusMessage.objects.get(id=1) # continously overwrite the first line
-        arduino_status.msg = request.body.decode('utf-8') # decode binary sent from arduino 
+        arduino_status = StatusMessage.objects.get(id=1) # continously overwrit>
+        arduino_status.msg = request.body.decode('utf-8') # decode binary sent >
         arduino_status.save() # save object
         return HttpResponse("saved")
     # get request from web server for current status
@@ -46,13 +46,12 @@ def status(request):
             return HttpResponse("PLAYING")
         elif StatusMessage.objects.get(id=1).msg == 'free':
             return HttpResponse("FREE")
-
 @csrf_exempt
 def selection(request):
     # post request with user selection of song
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8')) # decode json
-        music_selection = MusicSelection(selection = data['arguments']) # create object
+        music_selection = MusicNotes(notes = data['arguments']) # create object
         if music_selection: # save if object exist 
             music_selection.save()
             return HttpResponse("YAY")
@@ -60,17 +59,17 @@ def selection(request):
             return HttpResponse("invalid input")
     # get request from arduino to know which song to play
     elif request.method == 'GET':
-        return HttpResponse(MusicSelection.objects.last().notes)
+        return HttpResponse(MusicNotes.objects.last().notes)
     
 @csrf_exempt
 def toggle(request):
     # post request from frontend with current input mode
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        control_mode = StatusMessage.objects.get(id=0)
+        control_mode = StatusMessage.objects.get(id=2)
         control_mode.msg = data['arguments']
         control_mode.save()
         return HttpResponse("saved")
     # get request from arduino to determine current input mode
     elif request.method == 'GET':
-        return HttpResponse(StatusMessage.objects.get(id=0).msg)
+        return HttpResponse(StatusMessage.objects.get(id=2).msg)
