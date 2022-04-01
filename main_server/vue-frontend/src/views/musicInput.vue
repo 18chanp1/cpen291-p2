@@ -1,3 +1,4 @@
+<!-- This page contains the music Input page -->
 <template>
 <div class = "General">
   <h1>Music Input</h1>
@@ -88,6 +89,8 @@
     
   <std_but type="button" @pressed-button = 'submitLoad()' text="Submit" class = "flexbut2" id = "ButtonForSubmit"></std_but>
 
+  
+  <!-- Error/success notification elements.  -->
   <div id="snackbar">{{error}}</div>
   <div id="snackbarG">{{error}}</div>
     
@@ -104,47 +107,52 @@ import axios from 'axios'
     name: 'musicInput',
     data(){
         return{
-            count:0,
-            script: '',
-            typedscript:'',
-            error: '',
-            songID:'',
-            loaded:'',
+            count:0,        //legacy code
+            script: '',     //button input data
+            typedscript:'', //typed input data
+            error: '',      //Error message data (e.g. Invalid inpiut)
+            songID:'',      //Stores the songID for save song
+            loaded:'',      //Stores the loaded song. 
         }
     },
     components:{
       std_but,
     },
     methods:{
+        //Buttons add the button content (e.g. C1) to the button input script (this.script)
         clicked(nextchar){
           this.count++
           this.script = this.script.concat(nextchar)
         },
+        //sets the scripts to 0. 
         reset(){
           this.script=''
         },
+        //submits the typed input (this.typedscript) to the server by HTML POST request. Includes error checking
         async submitForm(){
           var pattern = /^(([A-GR][0-9]+)*)$/
           console.log(pattern.test(this.typedscript))
 
-
+          //error checking
           if(!pattern.test(this.typedscript)){
             console.log('inputerr')
             this.showBar('Input error. Please study the input format in detail.', '')
             return
           }
 
-          
+          //check that robot is free before sending requests. 
           var p = this.isFree()
           console.log("checking server is free?")
           console.log(p)
 
+          //if playing "0", notify user and reject input. 
           if (this.isFree() == 0){
             console.log('robot playing')
             this.showBar('The robot is currently playing music. Please try again later','')
             return
           }
 
+          //if cannot connect, reject input, and notify. 
           if(this.isFree() == 2){
             this.showBar("Server error. Please try again later.",'')
             return
@@ -152,6 +160,7 @@ import axios from 'axios'
          
          else {
             console.log('submitted, typed')
+            //prepare HTML POST request with typed data. 
             const request = {
               type: 'MusicInTyped',
               arguments: this.typedscript,
@@ -162,8 +171,10 @@ import axios from 'axios'
               .then(response =>{
                 console.log(response)
 
+                //update cookies for total song plays. 
                 window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
 
+                //parse and update notes, and update statistics for each note played. 
                 var isLetter = /^[A-GR]$/
 
                 for(var i = 0; i < this.typedscript.length; i++ ){
@@ -181,13 +192,16 @@ import axios from 'axios'
                 this.showBar("Server error. Please try again later.",'')
               })
           } 
-        },async submitBut(){
+        },
+        //submits the button inputs so far to the server via POST request. Checks this.script
+        async submitBut(){
           console.log('submitted, button')
           const request = {
             type: 'MusicInButtoned',
             arguments: this.script,
           }
 
+          //check server is free and available. if not, block
           var p = this.isFree()
           console.log("checking server is free?")
           console.log(p)
@@ -203,6 +217,7 @@ import axios from 'axios'
             return
           }
           
+          //send HTML post request to server with input. checks this.typedscript. 
           await axios 
             .post('/api/input/', request)
             .then(response =>{
@@ -210,6 +225,7 @@ import axios from 'axios'
 
               var isLetter = /^[A-GR]$/
 
+              //parse and update statistics on cookies. 
               for(var i = 0; i < this.script.length; i++ ){
                 var letter = this.script.charAt(i)
                 if(isLetter.test(letter)){
@@ -219,22 +235,28 @@ import axios from 'axios'
               
               window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
 
+              //notify user.
               this.showBar("Submission accepted. You will now be redirected home", 'G')
               setTimeout(this.redirectHome, 2500)
             }).catch(error => {
+              //notify user. 
               console.log(error)
               this.showBar("Server error. Please try again later.",'')
             })
           },
+          //code to display notification snackbar. 
           showBar(input, color) {
             this.error = input
             var x = document.getElementById("snackbar" + color);
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
           },
+          //code to redirect to homepage.  after submissions. 
           redirectHome(){
             this.$router.push('/')
           },
+          //code to check that server is free by HTML get request. Returns 1 if free, 2 if server has error, and 0 for
+          // any other status. 
            isFree(){
             console.log('getting data')     
             axios 
@@ -256,41 +278,57 @@ import axios from 'axios'
                 return 2
               })
           },
+          //function to save songs to cookies. For button inputs. 
           save() {
+            //gets current song quantity in cookies for ID generation size
             var curr = window.$cookies.get("songsz")
             curr++
+            //sets total song quantity and saves button input so far to cookies. 
             window.$cookies.set('S' + curr, this.script)
             window.$cookies.set("songsz", curr)
+            //tells user about ID
             alert("The song ID is: " + curr + ". \n You will need this ID to load the song, so keep it in a safe place")
             
           },
+          //function to save songs to cookies. For typed inputs. 
           saveTyped() {
+            //gets current song quantity in cookies for ID generation size
             var pattern = /^(([A-GR][0-9]+)*)$/
 
+            //checks that user input is valid. 
             if(!pattern.test(this.typedscript)){
               console.log('inputerr')
               this.showBar('Input error. Please study the input format in detail.', '')
               return
             }
             
+            //sets total song quantity and saves typed input so far to cookies. 
             var curr = window.$cookies.get("songsz")
             curr++
             window.$cookies.set('S' + curr, this.typedscript)
             window.$cookies.set("songsz", curr)
+            //notify user. 
             alert("The song ID is: " + curr + ". \n You will need this ID to load the song, so keep it in a safe place")
             
           }, 
+          //this function loads songs from song ID
           load(){
+            //checks that input is valid, and ID does not exceed total song count (validity. )
             var pattern = /^[0-9]+$/
             var max = window.$cookies.get("songsz")
+
+            //notify and return if not valid. 
             if(!pattern.test(this.songID) || parseInt(this.songID) > max){
               this.showBar("Song ID is invalid. Please try again.", "")
               console.log("bad load")
               return;
             }
+
+            //load songs to this.songID.
             this.loaded = window.$cookies.get("S" + this.songID)
             this.showBar("Loaded successfully", "G")
           },
+          //submits loaded content (this.load) to be played. 
           submitLoad(){
             console.log("sload")
             this.typedscript = this.loaded

@@ -1,3 +1,4 @@
+<!-- This page displays the statistics page -->
 <template>
   <div class="General">
     <h1>Statistics</h1>
@@ -33,12 +34,18 @@
       this.cookiedata()
     },
     methods: {
+      //fetches cookie data, and sets :
+      // this.favnote to the most played note
+      // this.lifnote to the total notes played
+      // this.songs to the total songs played
       cookiedata(){
         this.songs = window.$cookies.get("sum")
 
         var max = window.$cookies.get('A');
         var maxChr = 'A';
         var totalNote = 0
+
+        //find most played note by searching through all letters. 
 
         for(var i = 0; i < 26; i++){
           var chr = String.fromCharCode(65 + i);
@@ -53,6 +60,7 @@
 
         }
 
+        //sets other statistics. 
         this.favnote = maxChr
         this.lifnote = totalNote
       }

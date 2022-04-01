@@ -7,6 +7,8 @@ import VueCookies from 'vue-cookies'
 createApp(App).use(router, VueCookies).mount('#app')
 
 
+//initializes cookies on first page entry so all stats are 0. 
+
 if(!window.$cookies.isKey('A')){
     for(var p = 0; p < 26; p++){
       window.$cookies.set(String.fromCharCode(65 + p), 0)

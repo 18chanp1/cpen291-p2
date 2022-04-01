@@ -1,4 +1,5 @@
 <template>
+    <!-- Dropdown box -->
     <select class = "Generaldd" id="ddin" v-model="box_in">
         <option class="Generaldd" value="Mario">Mario Theme Song</option>
         <option class="Generaldd" value="RickRoll">Never gonna give you up</option>
@@ -14,14 +15,15 @@
 </template>
 
 <script>
+  //This file implements the drop down bar.
   import axios from 'axios'
   import std_but from "/src/components/std_but.vue"
 
   export default {
     data() {
       return {
-        box_in: '',
-        error: '',
+        box_in: '', //stores the choice that is selected (i.e. which hardcoded song)
+        error: '',  //stores any error message (e.g. if server is busy.)
       }
     },
     components:{
@@ -29,19 +31,22 @@
     },
     methods:{
       clicked() {
+        //reject if no choice selected. 
         if(this.box_in == ''){
           return
         }
-
+        //otherwise, submit. 
         this.submitBut()
       }, 
+      //submits this.box_in (hardcode song selection) to server via HTML post request
       async submitBut(){
           console.log('submitted, button')
           const request = {
             type: 'MusicSelection',
-            arguments: this.box_in,
+            arguments: this.box_in, 
           }
           
+          //check that server is free and reachable. 
           console.log("submitting box items")
           if(this.isFree() == 0){
             this.showBar("Device is currently playing music, please try again later",'')
@@ -58,17 +63,22 @@
             .post('/api/selection/', request)
             .then(response =>{
               console.log(response)
+              //notify user successful
               this.showBar("Submission accepted. You will now be redirected home", 'G')
               setTimeout(this.redirectHome, 2500)
 
+              //update cookies stats for most popular song and total songs played. 
               window.$cookies.set(this.box_in, (parseInt(window.$cookies.get(this.box_in)) + 1))
               window.$cookies.set("sum", (parseInt(window.$cookies.get("sum")) + 1))
 
             }).catch(error => {
+              //notify user. 
               console.log(error.status)
               this.showBar("Server error. Please try again later.",'')
             })
       },
+      // returns 1 if server is free, 0 for any other response, and 2 if server cannot be reached
+      //gets status via HTML get request. 
       isFree(){
             console.log('getting data')     
             axios 
@@ -90,6 +100,7 @@
                 return 2
               })
       },
+      //function for notification bar. 
       showBar(input, color) {
         this.error = input
         var x = document.getElementById("snackbar" + color);

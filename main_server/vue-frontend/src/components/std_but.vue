@@ -4,6 +4,8 @@
 
 <script>
 
+//A standard button that emits an event along with the button name. 
+
     export default{
         name: 'std_but',
         props:{

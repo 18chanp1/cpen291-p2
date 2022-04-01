@@ -1,3 +1,4 @@
+<!-- This page displays the homepage of our website -->
 <template>
   <div class="General">
     <h1>The Music Player</h1>
@@ -49,25 +50,33 @@
   import axios from 'axios'
   import drop_down from '/src/components/drop_down.vue'
 
-  // import std_but from '/src/components/std_but.vue'
   export default {
     name: 'homePage',
     data() { 
       return{
+        // Status of the robot, defaults to loading until first fetch. 
         status: 'Loading',
+        // Stores robot mode or online mode. True is online mode, and is set 
+        // to default here. 
         selector: true,
       }
     }, mounted (){
+      //starts polling the server when page lows. 
       this.pollStatusWrapper()
     },
     methods: {
       clicked (){
+        //for debugging.
         console.log('oi')
         this.$router.push('/about');
       },
       async pollStatus(){
+        //polls the status of the server via GET requests.
         console.log('getting data') 
+
+        // stores the html element status Indicator to change color when needed. 
         var elem = document.getElementById("statusIndicator")    
+        //sends get request
           await axios 
             .get('/api/status')
             .then(response =>{
@@ -91,10 +100,14 @@
               console.log(error.status)
             })
       },
+      //polls the staus every 500ms, starting right away. 
       pollStatusWrapper() {
         this.pollStatus()
         setInterval(this.pollStatus, 500)
       },
+      //sends a post request to the server on status selector. 
+      //"True" on slider is online mode
+      //False is arduino control mode. 
       async submitMode(){
         console.log('submitted, typed')
             var opmode
@@ -120,6 +133,7 @@
                 setTimeout(this.reverseSelect, 500)
               })
       },
+      //reverses the selector if the server fails to process the post request. visual indicator. 
       reverseSelect() {
         this.selector = !this.selector
       }

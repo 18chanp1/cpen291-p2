@@ -1,3 +1,6 @@
+<!-- This page displays images and descriptions of the creators.-->
+
+
 <template>
   <div class="General">
     <h1>About the creators</h1>
