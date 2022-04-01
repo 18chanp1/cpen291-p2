@@ -93,7 +93,7 @@
       },
       pollStatusWrapper() {
         this.pollStatus()
-        setInterval(this.pollStatus, 4000)
+        setInterval(this.pollStatus, 500)
       },
       async submitMode(){
         console.log('submitted, typed')
