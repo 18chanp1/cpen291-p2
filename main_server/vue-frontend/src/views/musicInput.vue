@@ -128,7 +128,7 @@ import axios from 'axios'
         reset(){
           this.script=''
         },
-        //submits the typed input (this.typedscript) to the server by HTML POST request. Includes error checking
+        //submits the typed input (this.typedscript) to the server by HTML POST request to /api/input. Includes error checking
         async submitForm(){
           var pattern = /^(([A-GR][0-9]+)*)$/
           console.log(pattern.test(this.typedscript))
@@ -217,7 +217,7 @@ import axios from 'axios'
             return
           }
           
-          //send HTML post request to server with input. checks this.typedscript. 
+          //send HTML post request to server (/api/input) with input. checks this.typedscript. 
           await axios 
             .post('/api/input/', request)
             .then(response =>{
@@ -255,7 +255,7 @@ import axios from 'axios'
           redirectHome(){
             this.$router.push('/')
           },
-          //code to check that server is free by HTML get request. Returns 1 if free, 2 if server has error, and 0 for
+          //code to check that server is free by HTML (/api/status) get request. Returns 1 if free, 2 if server has error, and 0 for
           // any other status. 
            isFree(){
             console.log('getting data')     

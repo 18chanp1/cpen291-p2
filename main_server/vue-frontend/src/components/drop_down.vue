@@ -38,7 +38,7 @@
         //otherwise, submit. 
         this.submitBut()
       }, 
-      //submits this.box_in (hardcode song selection) to server via HTML post request
+      //submits this.box_in (hardcode song selection) to server via HTML post request to /api/selection
       async submitBut(){
           console.log('submitted, button')
           const request = {
@@ -78,7 +78,7 @@
             })
       },
       // returns 1 if server is free, 0 for any other response, and 2 if server cannot be reached
-      //gets status via HTML get request. 
+      //gets status via HTML get request to /api/status. 
       isFree(){
             console.log('getting data')     
             axios 
