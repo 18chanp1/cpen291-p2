@@ -47,7 +47,7 @@ void draw() {
       if(content.equals("Mario")){
         myPort.write("M");
       } else if(content.equals("RickRoll")){
-        myPort.write("R");
+        myPort.write("R");      
       } else if (content.equals("GoukurakuJoudo")){
         myPort.write("G");
       } else {

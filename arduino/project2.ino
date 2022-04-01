@@ -84,24 +84,22 @@ void loop() {
     if (val != ""){
       digitalWrite(LED7, LOW);
       delay(100);
+      Serial.write("$");
       if (val.equals("M")){
-        digitalWrite(LED4, HIGH);
-        delay(100);
-        digitalWrite(LED4, LOW);
+    
         sing(1);
       } else if (val.equals("R")){
+        
         sing(2);
       } else if (val.equals("G")){
-        digitalWrite(LED4, HIGH);
-        delay(100);
-        digitalWrite(LED4, LOW);
+       
         sing(3);
       } else {
-        Serial.write("$"); //send message to server arduino is busy
+        //send message to server arduino is busy
         parse(val);
-        Serial.write("%");
+        
       }
-      
+      Serial.write("%");
       val = "";
     }
 
